@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d8f6b2b-01ea-46f1-81cd-56f0ac3ab13b" name="Default Changelist" comment="" />
+    <list default="true" id="2d8f6b2b-01ea-46f1-81cd-56f0ac3ab13b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/FirstComeFirstServed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/FirstComeFirstServed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/PriorityScheduling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/PriorityScheduling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/RoundRobin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/RoundRobin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/ShortJobFirst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/ShortJobFirst.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +41,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -84,7 +93,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1613671815165</updated>
-      <workItem from="1614121401964" duration="1035000" />
+      <workItem from="1614121401964" duration="1676000" />
     </task>
     <task id="LOCAL-00001" summary="added classes for each algorithm">
       <created>1614122161242</created>
@@ -93,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614122161242</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="adding descriptions for algorithms">
+      <created>1614122738709</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1614122738709</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +117,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added classes for each algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="added classes for each algorithm" />
+    <MESSAGE value="adding descriptions for algorithms" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding descriptions for algorithms" />
   </component>
 </project>

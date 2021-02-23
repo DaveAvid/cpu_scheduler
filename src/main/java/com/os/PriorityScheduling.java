@@ -1,4 +1,6 @@
 package com.os;
+import java.util.*;
+
 //The processes with the highest priorities always get the CPU.
 // Lower-priority processes may be preempted if a process
 // with a higher priority becomes runnable.
