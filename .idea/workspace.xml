@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d8f6b2b-01ea-46f1-81cd-56f0ac3ab13b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/CpuScheduler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cpu_scheduler.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/FirstComeFirstServed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/schedulers/FirstComeFirstServed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/PriorityScheduling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/schedulers/PriorityScheduling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/RoundRobin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/schedulers/RoundRobin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/ShortJobFirst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/schedulers/ShortJobFirst.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +66,7 @@
       </list>
     </option>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -75,5 +79,11 @@
       <updated>1613671815165</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser" timestamp="1614123399547">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1614123399547" />
   </component>
 </project>
