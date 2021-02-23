@@ -1,13 +1,10 @@
 package com.os;
 
 import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class CircularLinkedList<P> {
-
-
-        /*
-         * The added method for Assignment 2 that I implemented is: indexOf(AnyType value) at line 134
-         */
+public class CircularLinkedList<AnyType> implements List<AnyType>{
 
         //nested Node class
         private static class Node<AnyType>
@@ -15,8 +12,7 @@ public class CircularLinkedList<P> {
             private AnyType data;
             private Node<AnyType> next;
 
-            public Node(AnyType d, Node<AnyType> n)
-            {
+            public Node(AnyType d, Node<AnyType> n) {
                 setData(d);
                 setNext(n);
             }
@@ -35,8 +31,7 @@ public class CircularLinkedList<P> {
         private Node<AnyType> tail;
 
         //constructor
-  public CircularLinkedList()
-        {
+  public CircularLinkedList() {
             tail = new Node<AnyType>(null, null);
             modCount = 0;
             theSize=0;
@@ -63,15 +58,13 @@ public class CircularLinkedList<P> {
         }
 
         //get data from node at a given index
-        public AnyType get(int index)
-        {
+        public AnyType get(int index) {
             Node<AnyType> theNode = getNode(index);
             return theNode.getData();
         }
 
         //set data of a node at a given index to something new
-        public AnyType set(int index, AnyType newValue)
-        {
+        public AnyType set(int index, AnyType newValue) {
             Node<AnyType> nodeSet = getNode(index);
             AnyType old = nodeSet.getData();
 
@@ -80,8 +73,7 @@ public class CircularLinkedList<P> {
         }
 
         //return true if new node was added to list
-        public boolean add(AnyType newValue)
-        {
+        public boolean add(AnyType newValue) {
             add(size(), newValue);
             return true;
         }
@@ -91,8 +83,7 @@ public class CircularLinkedList<P> {
         //if you want to add the node at index 0 with other nodes in the list
         //if you want to add the node at the end of the list
         //if you want to add the node in the middle of the list;
-        public void add(int index, AnyType newValue)
-        {
+        public void add(int index, AnyType newValue) {
             if(index==0 && size()==0) addFirst(newValue);
             else if(index == 0) addBeginning(newValue);
             else if(index == size()) addLast(newValue);
