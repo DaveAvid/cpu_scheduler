@@ -1,4 +1,4 @@
-package com.os.schedulers;
+package com.os;
 
 public class FirstComeFirstServed {
 }
