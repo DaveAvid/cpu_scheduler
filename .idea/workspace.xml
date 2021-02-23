@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d8f6b2b-01ea-46f1-81cd-56f0ac3ab13b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/FirstComeFirstServed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/schedulers/FirstComeFirstServed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/PriorityScheduling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/schedulers/PriorityScheduling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/RoundRobin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/schedulers/RoundRobin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/ShortJobFirst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/schedulers/ShortJobFirst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/CircularLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/CircularLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
