@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d8f6b2b-01ea-46f1-81cd-56f0ac3ab13b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/os/models/State.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/CircularLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/CircularLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/PriorityScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/PriorityScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/RoundRobinScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/RoundRobinScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/ShortJobFirstScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/ShortJobFirstScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/models/DaveProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/models/DaveProcess.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +25,7 @@
       <list>
         <option value="Class" />
         <option value="Interface" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -40,6 +46,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15332031" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -79,16 +89,48 @@
       <option name="presentableId" value="Default" />
       <updated>1613671815165</updated>
     </task>
+    <task id="LOCAL-00001" summary="death to all">
+      <created>1614124509667</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1614124509667</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="death to all" />
+    <option name="LAST_COMMIT_MESSAGE" value="death to all" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser" timestamp="1614123399547">
+    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser" timestamp="1614200314259">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1614123399547" />
-    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614123559965">
+    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1614200314259" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1614193895222">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1614123559965" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1614193895222" />
+    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1614203106056">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1614203106056" />
+    <state x="672" y="235" key="MultipleFileMergeDialog" timestamp="1614124488234">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="672" y="235" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1614124488234" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1614202786936">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1614202786936" />
+    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614125350729">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1614125350729" />
+    <state x="143" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1614195865585">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="143" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614195865585" />
   </component>
 </project>
