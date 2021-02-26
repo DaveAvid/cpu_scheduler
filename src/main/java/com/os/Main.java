@@ -2,7 +2,7 @@ package com.os;
 
 import com.os.algorithms.FirstComeFirstServedScheduler;
 import com.os.controller.Scheduler;
-import com.os.models.DaveProcess;
+import com.os.models.SystemProcess;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,16 +13,16 @@ public class Main {
         {
             int[] cpuBurst = new int[]{5, 8, 9};
             int[] ioBurst = new int[]{4, 2};
-            DaveProcess daveProcess = new DaveProcess("apache", 3, 2, cpuBurst, ioBurst);
+            SystemProcess systemProcess = new SystemProcess("apache", 3, 2, cpuBurst, ioBurst);
             //add process to scheduler
-            scheduler.addProcess(daveProcess);
+            scheduler.addProcess(systemProcess);
         }
         {
             int[] cpuBurst = new int[]{5, 8, 9};
             int[] ioBurst = new int[]{4, 2};
-            DaveProcess daveProcess = new DaveProcess("french", 2, 1, cpuBurst, ioBurst);
+            SystemProcess systemProcess = new SystemProcess("french", 2, 1, cpuBurst, ioBurst);
             //add process to scheduler
-            scheduler.addProcess(daveProcess);
+            scheduler.addProcess(systemProcess);
         }
 
         //start scheduler thread

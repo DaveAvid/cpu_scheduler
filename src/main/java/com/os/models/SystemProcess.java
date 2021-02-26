@@ -4,7 +4,7 @@ package com.os.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaveProcess {
+public class SystemProcess {
     private static int PID_COUNTER = 0;
     final private String name;
     final private int pid;
@@ -20,7 +20,7 @@ public class DaveProcess {
     private State state;
 
 
-    public DaveProcess(String name, int arrivalTime, int priorityLevel, int[] cpuBurst, int[] ioBurst) {
+    public SystemProcess(String name, int arrivalTime, int priorityLevel, int[] cpuBurst, int[] ioBurst) {
         this.name = name;
         this.pid = getNextPid();
         this.arrivalTime = arrivalTime;
@@ -45,6 +45,14 @@ public class DaveProcess {
     public static int getNextPid() {
         PID_COUNTER++;
         return PID_COUNTER;
+    }
+
+    public List<Integer> getCpuBurstQueue() {
+        return cpuBurstQueue;
+    }
+
+    public List<Integer> getIoBurstQueue() {
+        return ioBurstQueue;
     }
 
     public int getArrivalTime() {

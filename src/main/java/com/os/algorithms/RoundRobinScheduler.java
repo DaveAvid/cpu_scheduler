@@ -1,7 +1,7 @@
 package com.os.algorithms;
 
 import com.os.controller.Scheduler;
-import com.os.models.DaveProcess;
+import com.os.models.SystemProcess;
 
 public class RoundRobinScheduler extends Scheduler {
     public void run() {
@@ -11,7 +11,7 @@ public class RoundRobinScheduler extends Scheduler {
         }
     }
 
-    public DaveProcess getNextProcess() {
+    public SystemProcess getNextProcess() {
         return null;
     }
 }
