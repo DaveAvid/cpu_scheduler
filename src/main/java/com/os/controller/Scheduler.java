@@ -20,6 +20,7 @@ public abstract class Scheduler implements Runnable {
     }
 
     public abstract SystemProcess getNextProcess();
+    //method for calculating running time from cpu burst
 
     public void stopRunning() {
         IS_RUNNING = false;

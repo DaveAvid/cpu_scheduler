@@ -9,8 +9,21 @@ public class FirstComeFirstServedScheduler extends Scheduler {
     public void run() {
         IS_RUNNING = true;
         while (IS_RUNNING) {
-            currentProcess = getNextProcess();
-            currentProcess.setState(State.RUNNING);
+            try {
+                System.out.println("Current System Time: " + runningTime);
+                if (currentProcess == null) {
+                    currentProcess = getNextProcess();
+                    if (currentProcess == null) {
+                        continue;
+                    }
+                    currentProcess.setState(State.RUNNING);
+                }
+                if (currentProcess != null) {
+                    currentProcess.decrementCpuBurstTime();
+                }
+            }finally {
+                runningTime++;
+            }
         }
     }
 
@@ -18,6 +31,9 @@ public class FirstComeFirstServedScheduler extends Scheduler {
         SystemProcess foundProcess = null;
         //iterate through list of processes
         for (SystemProcess process : processList) {
+            if(process.getArrivalTime() < runningTime) {
+                continue;
+            }
             //create a base case, set found process to process so we have something to compare to
             if (foundProcess == null) {
                 foundProcess = process;

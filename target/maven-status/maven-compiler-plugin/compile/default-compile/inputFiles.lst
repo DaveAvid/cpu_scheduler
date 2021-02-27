@@ -1,0 +1,8 @@
+/Users/rv7388ow/IntelliJProjects/cpu_scheduler/src/main/java/com/os/models/State.java
+/Users/rv7388ow/IntelliJProjects/cpu_scheduler/src/main/java/com/os/algorithms/PriorityScheduler.java
+/Users/rv7388ow/IntelliJProjects/cpu_scheduler/src/main/java/com/os/Main.java
+/Users/rv7388ow/IntelliJProjects/cpu_scheduler/src/main/java/com/os/models/SystemProcess.java
+/Users/rv7388ow/IntelliJProjects/cpu_scheduler/src/main/java/com/os/algorithms/ShortJobFirstScheduler.java
+/Users/rv7388ow/IntelliJProjects/cpu_scheduler/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java
+/Users/rv7388ow/IntelliJProjects/cpu_scheduler/src/main/java/com/os/algorithms/RoundRobinScheduler.java
+/Users/rv7388ow/IntelliJProjects/cpu_scheduler/src/main/java/com/os/controller/Scheduler.java

@@ -16,7 +16,7 @@ public class SystemProcess {
     final private int waitTime;
     final private int turnaroundTime;
     private int completionTime;
-    private int cpuBurstRemaining;
+    private int cpuBurstRemaining = 0;
     private State state;
 
 
@@ -31,7 +31,6 @@ public class SystemProcess {
             cpuBurstQueue.add(cpu);
             totalCpuTime += cpu;
         }
-
         for (int io : ioBurst) {
             ioBurstQueue.add(io);
             totalIoTime += io;
@@ -47,8 +46,11 @@ public class SystemProcess {
         return PID_COUNTER;
     }
 
-    public List<Integer> getCpuBurstQueue() {
-        return cpuBurstQueue;
+    public int getNextCpuBurst() {
+        if(cpuBurstQueue.isEmpty()){
+            return 0;
+        }
+        return cpuBurstQueue.get(0);
     }
 
     public List<Integer> getIoBurstQueue() {
@@ -89,5 +91,19 @@ public class SystemProcess {
 
     public void setState(State state) {
         this.state = state;
+    }
+    public boolean cpuHasBurstRemaining(){
+        if(cpuBurstRemaining != 0 || !cpuBurstQueue.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+    public void decrementCpuBurstTime() {
+        if(cpuHasBurstRemaining()) {
+            if (cpuBurstRemaining == 0) {
+                cpuBurstRemaining = cpuBurstQueue.remove(0);
+            }
+            cpuBurstRemaining--;
+        }
     }
 }
