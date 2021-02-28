@@ -17,6 +17,7 @@ public class SystemProcess {
     final private int turnaroundTime;
     private int completionTime;
     private int cpuBurstRemaining = 0;
+    private int ioBurstRemaining = 0;
     private State state;
 
 
@@ -47,10 +48,17 @@ public class SystemProcess {
     }
 
     public int getNextCpuBurst() {
-        if(cpuBurstQueue.isEmpty()){
+        if (cpuBurstQueue.isEmpty()) {
             return 0;
         }
         return cpuBurstQueue.get(0);
+    }
+
+    public int getNextIoBurst() {
+        if (ioBurstQueue.isEmpty()) {
+            return 0;
+        }
+        return ioBurstQueue.get(0);
     }
 
     public List<Integer> getIoBurstQueue() {
@@ -92,18 +100,36 @@ public class SystemProcess {
     public void setState(State state) {
         this.state = state;
     }
-    public boolean cpuHasBurstRemaining(){
-        if(cpuBurstRemaining != 0 || !cpuBurstQueue.isEmpty()) {
+
+    public boolean cpuHasBurstRemaining() {
+        if (cpuBurstRemaining != 0 || !cpuBurstQueue.isEmpty()) {
             return true;
         }
         return false;
     }
+
+    public boolean ioHasBurstRemaining() {
+        if (ioBurstRemaining != 0 || !ioBurstQueue.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
     public void decrementCpuBurstTime() {
-        if(cpuHasBurstRemaining()) {
+        if (cpuHasBurstRemaining()) {
             if (cpuBurstRemaining == 0) {
                 cpuBurstRemaining = cpuBurstQueue.remove(0);
             }
             cpuBurstRemaining--;
+        }
+    }
+
+    public void removeIoBurst() {
+        if (ioHasBurstRemaining()) {
+            if (ioBurstRemaining == 0) {
+                ioBurstRemaining = ioBurstQueue.remove(0);
+            }
+            ioBurstRemaining--;
         }
     }
 }
