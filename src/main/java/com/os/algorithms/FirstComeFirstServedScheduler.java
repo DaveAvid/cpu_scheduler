@@ -21,7 +21,7 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                 if (currentProcess != null) {
                     currentProcess.decrementCpuBurstTime();
                 }
-            }finally {
+            } finally {
                 runningTime++;
             }
         }
@@ -31,7 +31,7 @@ public class FirstComeFirstServedScheduler extends Scheduler {
         SystemProcess foundProcess = null;
         //iterate through list of processes
         for (SystemProcess process : processList) {
-            if(process.getArrivalTime() > runningTime) {
+            if (process.getArrivalTime() > runningTime) {
                 continue;
             }
             //create a base case, set found process to process so we have something to compare to
