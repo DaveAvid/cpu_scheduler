@@ -124,7 +124,7 @@ public class SystemProcess {
         }
     }
 
-    public void removeIoBurst() {
+    public void decrementIoBurst() {
         if (ioHasBurstRemaining()) {
             if (ioBurstRemaining == 0) {
                 ioBurstRemaining = ioBurstQueue.remove(0);
