@@ -4,7 +4,9 @@ import com.os.models.State;
 import com.os.models.SystemProcess;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 
 public abstract class Scheduler implements Runnable {
@@ -14,8 +16,8 @@ public abstract class Scheduler implements Runnable {
     protected int runningTime = 0;
     protected SystemProcess currentProcess;
     protected SystemProcess ioCurrentProcess;
-    protected List<SystemProcess> readyQueue = new ArrayList<>();
-    protected List<SystemProcess> ioWaitQueue = new ArrayList<>();
+    protected Queue<SystemProcess> readyQueue = new LinkedList<>();
+    protected Queue<SystemProcess> ioWaitQueue = new LinkedList<>();
 
     public void addProcess(SystemProcess systemProcess) {
         systemProcess.setState(State.READY);

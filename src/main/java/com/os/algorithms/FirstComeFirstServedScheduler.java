@@ -24,11 +24,14 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                 }
                 if (!readyQueue.isEmpty() && currentProcess.getCpuBurstRemaining() == 0) {
                     ioWaitQueue.add(currentProcess);
-                    ioCurrentProcess = ioWaitQueue.get(0);
+                    ioCurrentProcess = ioWaitQueue.poll();
                     ioCurrentProcess.setState(State.WAITING);
                 }
                 if (ioCurrentProcess != null) {
                     ioCurrentProcess.decrementIoBurst();
+                    if (ioCurrentProcess.getIoBurstRemaining() == 0) {
+                        readyQueue.add(ioCurrentProcess);
+                    }
                 }
 
                 if (readyQueue.isEmpty()) {
