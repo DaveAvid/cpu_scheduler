@@ -10,7 +10,6 @@ public class FirstComeFirstServedScheduler extends Scheduler {
         IS_RUNNING = true;
         while (IS_RUNNING) {
             try {
-                addToReadyQueue();
                 System.out.println("Current System Time: " + runningTime);
                 if (currentProcess == null) {
                     currentProcess = getNextProcess();
@@ -20,10 +19,24 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                     currentProcess.setState(State.RUNNING);
                 }
                 if (currentProcess != null) {
+                    addToReadyQueue();
                     currentProcess.decrementCpuBurstTime();
+                }
+                if (!readyQueue.isEmpty() && currentProcess.getCpuBurstRemaining() == 0) {
+                    ioWaitQueue.add(currentProcess);
+                    ioCurrentProcess = ioWaitQueue.get(0);
+                    ioCurrentProcess.setState(State.WAITING);
+                }
+                if (ioCurrentProcess != null) {
+                    ioCurrentProcess.decrementIoBurst();
+                }
+
+                if (readyQueue.isEmpty()) {
+                    continue;
                 }
             } finally {
                 runningTime++;
+
             }
         }
     }
@@ -49,7 +62,6 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                 //find the shortest arrival time and perform first come first served on the found process
             } else if (foundProcess.getArrivalTime() > process.getArrivalTime()) {
                 foundProcess = process;
-
             }
         }
         return foundProcess;

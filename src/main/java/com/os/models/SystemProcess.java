@@ -93,6 +93,10 @@ public class SystemProcess {
         return cpuBurstRemaining;
     }
 
+    public int getIoBurstRemaining() {
+        return ioBurstRemaining;
+    }
+
     public State getState() {
         return state;
     }

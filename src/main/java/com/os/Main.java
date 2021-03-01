@@ -18,8 +18,8 @@ public class Main {
             scheduler.addProcess(systemProcess);
         }
         {
-            int[] cpuBurst = new int[]{5, 8, 9};
-            int[] ioBurst = new int[]{4, 2};
+            int[] cpuBurst = new int[]{6, 7, 10};
+            int[] ioBurst = new int[]{5, 3};
             SystemProcess systemProcess = new SystemProcess("french", 2, 1, cpuBurst, ioBurst);
             //add process to scheduler
             scheduler.addProcess(systemProcess);
