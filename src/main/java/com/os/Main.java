@@ -25,9 +25,15 @@ public class Main {
             scheduler.addProcess(systemProcess);
         }
 
+
         //start scheduler thread
         Thread schedulerThread = new Thread(scheduler);
         schedulerThread.start();
 
     }
+
+    public void printSystemProcessing(SystemProcess systemProcess) {
+
+    }
+
 }
