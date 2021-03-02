@@ -114,6 +114,7 @@ public class SystemProcess {
             return true;
         }
         return false;
+
     }
 
     public boolean ioHasBurstRemaining() {
@@ -124,12 +125,12 @@ public class SystemProcess {
     }
 
     public void decrementCpuBurstTime() {
-        if (cpuHasBurstRemaining()) {
-            if (cpuBurstRemaining == 0) {
-                cpuBurstRemaining = cpuBurstQueue.remove(0);
-            }
-            cpuBurstRemaining--;
+
+        if (cpuBurstRemaining == 0) {
+            cpuBurstRemaining = cpuBurstQueue.remove(0);
         }
+        cpuBurstRemaining--;
+
     }
 
     public void decrementIoBurst() {

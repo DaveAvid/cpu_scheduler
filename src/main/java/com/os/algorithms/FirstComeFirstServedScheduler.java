@@ -17,16 +17,17 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                     if (cpuCurrentProcess == null) {
                         continue;
                     }
-
                 }
                 addToReadyQueue();
 
                 if (cpuCurrentProcess.cpuHasBurstRemaining()) {
                     addToCurrentCpuProcess();
                     cpuCurrentProcess.decrementCpuBurstTime();
+
                 } else {
                     addToCurrentIoProcess();
                 }
+
                 //possible if/else check
                 processIoBurst();
             } finally {
@@ -38,14 +39,10 @@ public class FirstComeFirstServedScheduler extends Scheduler {
     }
 
     private void addToCurrentIoProcess() {
-        if (cpuCurrentProcess.cpuHasBurstRemaining()) {
-
-        } else {
-            ioWaitQueue.add(cpuCurrentProcess);
-            if (ioCurrentProcess == null) {
-                ioCurrentProcess = ioWaitQueue.poll();
-                ioCurrentProcess.setState(State.WAITING);
-            }
+        ioWaitQueue.add(cpuCurrentProcess);
+        if (ioCurrentProcess == null) {
+            ioCurrentProcess = ioWaitQueue.poll();
+            ioCurrentProcess.setState(State.WAITING);
         }
     }
 
@@ -73,6 +70,10 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                 readyQueue.add(foundProcess);
             }
         }
+    }
+
+    public void addToIoWaitQueue() {
+
     }
 
 
