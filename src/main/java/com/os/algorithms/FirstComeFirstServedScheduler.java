@@ -11,32 +11,29 @@ public class FirstComeFirstServedScheduler extends Scheduler {
         while (IS_RUNNING) {
             try {
                 System.out.println("Current System Time: " + runningTime);
-                if (currentProcess == null) {
-                    currentProcess = getNextProcess();
-                    if (currentProcess == null) {
+                if (cpuCurrentProcess == null) {
+                    cpuCurrentProcess = getNextProcess();
+                    if (cpuCurrentProcess == null) {
                         continue;
                     }
-                    currentProcess.setState(State.RUNNING);
+
                 }
-                if (currentProcess != null) {
-                    addToReadyQueue();
-                    currentProcess.decrementCpuBurstTime();
-                }
-                if (!readyQueue.isEmpty() && currentProcess.getCpuBurstRemaining() == 0) {
-                    ioWaitQueue.add(currentProcess);
+                addToReadyQueue(cpuCurrentProcess);
+
+                if (cpuCurrentProcess.cpuHasBurstRemaining() == true || !readyQueue.isEmpty()) {
+                    addToCurrentCpuProcess();
+                    cpuCurrentProcess.decrementCpuBurstTime();
+                } else {
+                    ioWaitQueue.add(cpuCurrentProcess);
                     ioCurrentProcess = ioWaitQueue.poll();
                     ioCurrentProcess.setState(State.WAITING);
                 }
-                if (ioCurrentProcess != null) {
-                    ioCurrentProcess.decrementIoBurst();
-                    if (ioCurrentProcess.getIoBurstRemaining() == 0) {
-                        readyQueue.add(ioCurrentProcess);
-                    }
-                }
+                //possible if/else check
 
-                if (readyQueue.isEmpty()) {
-                    continue;
-                }
+                processIoBurst();
+//                if (readyQueue.isEmpty()) {
+//                    continue;
+//                }
             } finally {
                 runningTime++;
 
@@ -44,11 +41,25 @@ public class FirstComeFirstServedScheduler extends Scheduler {
         }
     }
 
-    public void addToReadyQueue() {
-        for (SystemProcess foundProcess : processList) {
-            if (foundProcess.getArrivalTime() == runningTime) {
-                readyQueue.add(foundProcess);
+    private void processIoBurst() {
+        if (ioCurrentProcess != null) {
+            ioCurrentProcess.decrementIoBurst();
+            if (ioCurrentProcess.getIoBurstRemaining() == 0) {
+                readyQueue.add(ioCurrentProcess);
             }
+        }
+    }
+
+    public void addToReadyQueue(SystemProcess systemProcess) {
+        if (systemProcess.getArrivalTime() == runningTime) {
+            readyQueue.add(systemProcess);
+        }
+    }
+
+    public void addToCurrentCpuProcess() {
+        if (cpuCurrentProcess == null || !readyQueue.isEmpty()) {
+            cpuCurrentProcess = readyQueue.poll();
+            cpuCurrentProcess.setState(State.RUNNING);
         }
     }
 

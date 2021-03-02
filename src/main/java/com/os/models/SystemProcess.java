@@ -65,6 +65,10 @@ public class SystemProcess {
         return ioBurstQueue;
     }
 
+    public List<Integer> getCpuBurstQueue() {
+        return cpuBurstQueue;
+    }
+
     public int getArrivalTime() {
         return arrivalTime;
     }

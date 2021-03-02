@@ -14,7 +14,7 @@ public abstract class Scheduler implements Runnable {
     protected List<SystemProcess> processList = new ArrayList<SystemProcess>();
     protected boolean IS_RUNNING = false;
     protected int runningTime = 0;
-    protected SystemProcess currentProcess;
+    protected SystemProcess cpuCurrentProcess;
     protected SystemProcess ioCurrentProcess;
     protected Queue<SystemProcess> readyQueue = new LinkedList<>();
     protected Queue<SystemProcess> ioWaitQueue = new LinkedList<>();
