@@ -18,10 +18,21 @@ public abstract class Scheduler implements Runnable {
     protected SystemProcess ioCurrentProcess;
     protected Queue<SystemProcess> readyQueue = new LinkedList<>();
     protected Queue<SystemProcess> ioWaitQueue = new LinkedList<>();
+    protected List<SystemProcess> terminatedProcessList = new ArrayList<>();
 
     public void addProcess(SystemProcess systemProcess) {
         systemProcess.setState(State.READY);
         processList.add(systemProcess);
+    }
+
+    public void terminateProcess(SystemProcess systemProcess) {
+        if (cpuCurrentProcess.cpuHasBurstRemaining() &&
+                ioCurrentProcess.ioHasBurstRemaining() &&
+                cpuCurrentProcess.getCpuBurstQueue().isEmpty() &&
+                cpuCurrentProcess.getIoBurstQueue().isEmpty()) {
+            systemProcess.setState(State.TERMINATED);
+            terminatedProcessList.add(systemProcess);
+        }
     }
 
     public abstract SystemProcess getNextProcess();
