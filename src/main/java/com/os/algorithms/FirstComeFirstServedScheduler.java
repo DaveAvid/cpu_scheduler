@@ -18,13 +18,13 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                     }
 
                 }
-                addToReadyQueue(cpuCurrentProcess);
+                addToReadyQueue();
 
-                if (cpuCurrentProcess.cpuHasBurstRemaining() == true || !readyQueue.isEmpty()) {
+                if (cpuCurrentProcess.cpuHasBurstRemaining()) {
                     addToCurrentCpuProcess();
                     cpuCurrentProcess.decrementCpuBurstTime();
                 } else {
-                    ioWaitQueue.add(cpuCurrentProcess);
+                    ioWaitQueue.add(ioCurrentProcess);
                     ioCurrentProcess = ioWaitQueue.poll();
                     ioCurrentProcess.setState(State.WAITING);
                 }
@@ -50,18 +50,22 @@ public class FirstComeFirstServedScheduler extends Scheduler {
         }
     }
 
-    public void addToReadyQueue(SystemProcess systemProcess) {
-        if (systemProcess.getArrivalTime() == runningTime) {
-            readyQueue.add(systemProcess);
+    public void addToReadyQueue() {
+        for (SystemProcess foundProcess : processList) {
+            if (foundProcess.getArrivalTime() == runningTime) {
+                readyQueue.add(foundProcess);
+            }
         }
     }
 
     public void addToCurrentCpuProcess() {
-        if (cpuCurrentProcess == null || !readyQueue.isEmpty()) {
+        if (cpuCurrentProcess.getCpuBurstRemaining() == 0) {
             cpuCurrentProcess = readyQueue.poll();
+            ioWaitQueue.add(cpuCurrentProcess);
             cpuCurrentProcess.setState(State.RUNNING);
         }
     }
+
 
     public SystemProcess getNextProcess() {
         SystemProcess foundProcess = null;
