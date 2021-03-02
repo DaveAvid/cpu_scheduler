@@ -11,6 +11,7 @@ public class FirstComeFirstServedScheduler extends Scheduler {
         while (IS_RUNNING) {
             try {
                 System.out.println("Current System Time: " + runningTime);
+
                 if (cpuCurrentProcess == null) {
                     cpuCurrentProcess = getNextProcess();
                     if (cpuCurrentProcess == null) {
@@ -24,27 +25,41 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                     addToCurrentCpuProcess();
                     cpuCurrentProcess.decrementCpuBurstTime();
                 } else {
-                    ioWaitQueue.add(ioCurrentProcess);
-                    ioCurrentProcess = ioWaitQueue.poll();
-                    ioCurrentProcess.setState(State.WAITING);
+                    addToCurrentIoProcess();
                 }
                 //possible if/else check
-
                 processIoBurst();
-//                if (readyQueue.isEmpty()) {
-//                    continue;
-//                }
             } finally {
                 runningTime++;
 
+
             }
+        }
+    }
+
+    private void addToCurrentIoProcess() {
+        if (cpuCurrentProcess.cpuHasBurstRemaining()) {
+
+        } else {
+            ioWaitQueue.add(cpuCurrentProcess);
+            ioCurrentProcess = ioWaitQueue.poll();
+            ioCurrentProcess.setState(State.WAITING);
+        }
+    }
+
+    public void addToCurrentCpuProcess() {
+        if (cpuCurrentProcess.getCpuBurstRemaining() == 0) {
+            cpuCurrentProcess = readyQueue.poll();
+            cpuCurrentProcess.setState(State.RUNNING);
         }
     }
 
     private void processIoBurst() {
         if (ioCurrentProcess != null) {
             ioCurrentProcess.decrementIoBurst();
-            if (ioCurrentProcess.getIoBurstRemaining() == 0) {
+            if (ioCurrentProcess.ioHasBurstRemaining()) {
+
+            } else {
                 readyQueue.add(ioCurrentProcess);
             }
         }
@@ -55,14 +70,6 @@ public class FirstComeFirstServedScheduler extends Scheduler {
             if (foundProcess.getArrivalTime() == runningTime) {
                 readyQueue.add(foundProcess);
             }
-        }
-    }
-
-    public void addToCurrentCpuProcess() {
-        if (cpuCurrentProcess.getCpuBurstRemaining() == 0) {
-            cpuCurrentProcess = readyQueue.poll();
-            ioWaitQueue.add(cpuCurrentProcess);
-            cpuCurrentProcess.setState(State.RUNNING);
         }
     }
 

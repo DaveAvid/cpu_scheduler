@@ -140,4 +140,23 @@ public class SystemProcess {
             ioBurstRemaining--;
         }
     }
+
+    @Override
+    public String toString() {
+        return new org.apache.commons.lang3.builder.ToStringBuilder(this)
+                .append("name", name)
+                .append("pid", pid)
+                .append("arrivalTime", arrivalTime)
+                .append("priorityLevel", priorityLevel)
+                .append("cpuBurstQueue", cpuBurstQueue)
+                .append("ioBurstQueue", ioBurstQueue)
+                .append("ioWaitTime", ioWaitTime)
+                .append("waitTime", waitTime)
+                .append("turnaroundTime", turnaroundTime)
+                .append("completionTime", completionTime)
+                .append("cpuBurstRemaining", cpuBurstRemaining)
+                .append("ioBurstRemaining", ioBurstRemaining)
+                .append("state", state)
+                .toString();
+    }
 }
