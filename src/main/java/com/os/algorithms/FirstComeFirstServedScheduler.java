@@ -42,8 +42,10 @@ public class FirstComeFirstServedScheduler extends Scheduler {
 
         } else {
             ioWaitQueue.add(cpuCurrentProcess);
-            ioCurrentProcess = ioWaitQueue.poll();
-            ioCurrentProcess.setState(State.WAITING);
+            if (ioCurrentProcess == null) {
+                ioCurrentProcess = ioWaitQueue.poll();
+                ioCurrentProcess.setState(State.WAITING);
+            }
         }
     }
 
