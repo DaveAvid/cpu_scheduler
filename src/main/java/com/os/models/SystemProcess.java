@@ -97,8 +97,16 @@ public class SystemProcess {
         return cpuBurstRemaining;
     }
 
+    public void setCpuBurstRemaining(int cpuBurstRemaining) {
+        this.cpuBurstRemaining = cpuBurstRemaining;
+    }
+
     public int getIoBurstRemaining() {
         return ioBurstRemaining;
+    }
+
+    public void setIoBurstRemaining(int ioBurstRemaining) {
+        this.ioBurstRemaining = ioBurstRemaining;
     }
 
     public State getState() {
@@ -110,37 +118,43 @@ public class SystemProcess {
     }
 
     public boolean cpuHasBurstRemaining() {
-        if (cpuBurstRemaining != 0 || !cpuBurstQueue.isEmpty()) {
+        if (cpuBurstRemaining != 0) {
             return true;
         }
         return false;
+    }
 
+    public boolean cpuHasAdditionalBurstsInList() {
+        if (!cpuBurstQueue.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean ioHasAdditionalBurstInList() {
+        if (!ioBurstQueue.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     public boolean ioHasBurstRemaining() {
-        if (ioBurstRemaining != 0 || !ioBurstQueue.isEmpty()) {
+        if (ioBurstRemaining != 0) {
             return true;
         }
         return false;
     }
 
     public void decrementCpuBurstTime() {
-
-        if (cpuBurstRemaining == 0) {
-            cpuBurstRemaining = cpuBurstQueue.remove(0);
-        }
         cpuBurstRemaining--;
-
     }
 
     public void decrementIoBurst() {
-        if (ioHasBurstRemaining()) {
-            if (ioBurstRemaining == 0) {
-                ioBurstRemaining = ioBurstQueue.remove(0);
-            }
-            ioBurstRemaining--;
-        }
+
+
+        ioBurstRemaining--;
     }
+
 
     @Override
     public String toString() {
@@ -160,4 +174,6 @@ public class SystemProcess {
                 .append("state", state)
                 .toString();
     }
+
+
 }

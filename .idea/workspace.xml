@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d8f6b2b-01ea-46f1-81cd-56f0ac3ab13b" name="Default Changelist" comment="">
+    <list default="true" id="2d8f6b2b-01ea-46f1-81cd-56f0ac3ab13b" name="Default Changelist" comment="Added terminate process method in Scheduler">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/PriorityScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/PriorityScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/ShortJobFirstScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/ShortJobFirstScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/models/SystemProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/models/SystemProcess.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +173,21 @@
       <option name="project" value="LOCAL" />
       <updated>1614707221041</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added terminate process method in Scheduler">
+      <created>1614707315153</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1614707315153</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added terminate process method in Scheduler">
+      <created>1614728981234</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1614728981234</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -186,10 +204,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1614567100361" />
-    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser" timestamp="1614705690809">
+    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser" timestamp="1614745022033">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1614705690809" />
+    <state x="253" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1614745022033" />
     <state x="756" y="404" width="408" height="240" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1614203838331">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -198,46 +216,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1614203303187" />
-    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1614707220684">
+    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1614728980857">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1614707220684" />
+    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1614728980857" />
     <state width="451" height="466" key="DebuggerActiveHint" timestamp="1614662156249">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="451" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1614662156249" />
-    <state width="1877" height="316" key="GridCell.Tab.0.bottom" timestamp="1614707013056">
+    <state width="1877" height="364" key="GridCell.Tab.0.bottom" timestamp="1614747850702">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="316" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1614707013056" />
-    <state width="1877" height="316" key="GridCell.Tab.0.center" timestamp="1614707013056">
+    <state width="1877" height="364" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1614747850702" />
+    <state width="1877" height="364" key="GridCell.Tab.0.center" timestamp="1614747850702">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="316" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1614707013056" />
-    <state width="1877" height="316" key="GridCell.Tab.0.left" timestamp="1614707013056">
+    <state width="1877" height="364" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1614747850702" />
+    <state width="1877" height="364" key="GridCell.Tab.0.left" timestamp="1614747850702">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="316" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1614707013056" />
-    <state width="1877" height="316" key="GridCell.Tab.0.right" timestamp="1614707013056">
+    <state width="1877" height="364" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1614747850702" />
+    <state width="1877" height="364" key="GridCell.Tab.0.right" timestamp="1614747850702">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="316" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1614707013056" />
-    <state width="1877" height="316" key="GridCell.Tab.1.bottom" timestamp="1614707012273">
+    <state width="1877" height="364" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1614747850702" />
+    <state width="1877" height="364" key="GridCell.Tab.1.bottom" timestamp="1614747850792">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="316" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1614707012273" />
-    <state width="1877" height="316" key="GridCell.Tab.1.center" timestamp="1614707012273">
+    <state width="1877" height="364" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1614747850792" />
+    <state width="1877" height="364" key="GridCell.Tab.1.center" timestamp="1614747850791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="316" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1614707012273" />
-    <state width="1877" height="316" key="GridCell.Tab.1.left" timestamp="1614707012273">
+    <state width="1877" height="364" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1614747850791" />
+    <state width="1877" height="364" key="GridCell.Tab.1.left" timestamp="1614747850791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="316" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1614707012273" />
-    <state width="1877" height="316" key="GridCell.Tab.1.right" timestamp="1614707012273">
+    <state width="1877" height="364" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1614747850791" />
+    <state width="1877" height="364" key="GridCell.Tab.1.right" timestamp="1614747850791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="316" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1614707012273" />
+    <state width="1877" height="364" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1614747850791" />
     <state x="490" y="174" key="Maven.ArtifactSearchDialog" timestamp="1614705696751">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -254,14 +272,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1614705246513" />
-    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1614707222630">
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1614728983617">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1614707222630" />
-    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614566989513">
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1614728983617" />
+    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614726967581">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1614566989513" />
+    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1614726967581" />
     <state x="1193" y="242" key="extract.method.dialog" timestamp="1614705209608">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -274,41 +292,23 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614651689014" />
-    <state x="143" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1614572806795">
+    <state x="143" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1614744679808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="143" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614572806795" />
+    <state x="143" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614744679808" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="45" />
+          <line>34</line>
+          <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java</url>
-          <line>69</line>
-          <properties class="com.os.algorithms.FirstComeFirstServedScheduler" method="addToReadyQueue">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="57" />
+          <line>35</line>
+          <option name="timeStamp" value="68" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

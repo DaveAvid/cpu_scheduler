@@ -1,7 +1,6 @@
 package com.os.algorithms;
 
 import com.os.controller.Scheduler;
-import com.os.models.State;
 import com.os.models.SystemProcess;
 
 public class ShortJobFirstScheduler extends Scheduler {
@@ -15,7 +14,7 @@ public class ShortJobFirstScheduler extends Scheduler {
     public SystemProcess getNextProcess() {
         SystemProcess foundProcess = null;
         //iterate through list of processes
-        for (SystemProcess process : processList) {
+        for (SystemProcess process : readyQueue) {
             //create a base case, set found process to process so we have something to compare to
             if (foundProcess == null) {
                 foundProcess = process;

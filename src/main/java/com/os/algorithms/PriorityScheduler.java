@@ -14,7 +14,7 @@ public class PriorityScheduler extends Scheduler {
     public SystemProcess getNextProcess() {
         SystemProcess foundProcess = null;
         //iterate through list of processes
-        for (SystemProcess process : processList) {
+        for (SystemProcess process : readyQueue) {
             //create a base case, set found process to process so we have something to compare to
             if (foundProcess == null) {
                 foundProcess = process;
