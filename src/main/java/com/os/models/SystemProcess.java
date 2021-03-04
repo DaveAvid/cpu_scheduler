@@ -37,6 +37,7 @@ public class SystemProcess {
             totalIoTime += io;
         }
         turnaroundTime = totalCpuTime + totalIoTime;
+        completionTime = turnaroundTime;
         ioWaitTime = totalIoTime;
         waitTime = totalCpuTime;
         state = State.NEW;

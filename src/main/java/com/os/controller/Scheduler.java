@@ -33,11 +33,6 @@ public abstract class Scheduler implements Runnable {
         readyQueue.add(systemProcess);
     }
 
-    public void printWhatIsProcessing() {
-        for (SystemProcess systemProcess : readyQueue) {
-            System.out.println("Ready Queue: " + systemProcess.getName());
-        }
-    }
 
     public void terminateIfCpuComplete() {
         if (cpuCurrentProcess != null && !cpuCurrentProcess.cpuHasBurstRemaining() &&
