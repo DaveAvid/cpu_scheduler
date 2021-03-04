@@ -1,6 +1,7 @@
 package com.os;
 
 import com.os.algorithms.FirstComeFirstServedScheduler;
+import com.os.algorithms.PriorityScheduler;
 import com.os.algorithms.ShortJobFirstScheduler;
 import com.os.controller.Scheduler;
 import com.os.models.SystemProcess;
@@ -10,6 +11,7 @@ public class Main {
         //create one instance of scheduler
         Scheduler firstComeFirstServedScheduler = new FirstComeFirstServedScheduler();
         Scheduler shortJobFirstScheduler = new ShortJobFirstScheduler();
+        Scheduler priorityScheduler = new PriorityScheduler();
 
 
         //create new process from file(TOODO), currently hardcoded
