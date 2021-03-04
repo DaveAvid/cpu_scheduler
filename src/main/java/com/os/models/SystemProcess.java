@@ -109,6 +109,10 @@ public class SystemProcess {
         this.ioBurstRemaining = ioBurstRemaining;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public State getState() {
         return state;
     }

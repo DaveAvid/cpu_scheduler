@@ -10,7 +10,8 @@ public class ShortJobFirstScheduler extends Scheduler {
         IS_RUNNING = true;
         while (IS_RUNNING) {
             try {
-                System.out.println("Current System Time: " + runningTime);
+                printWhatIsProcessing();
+//                System.out.println("Current System Time: " + runningTime);
 
                 if (cpuCurrentProcess == null) {
                     cpuCurrentProcess = getNextProcess();

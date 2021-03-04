@@ -11,6 +11,7 @@ public class Main {
         Scheduler firstComeFirstServedScheduler = new FirstComeFirstServedScheduler();
         Scheduler shortJobFirstScheduler = new ShortJobFirstScheduler();
 
+
         //create new process from file(TOODO), currently hardcoded
         {
             int[] cpuBurst = new int[]{5, 8, 9};
@@ -34,8 +35,5 @@ public class Main {
 
     }
 
-    public void printSystemProcessing(SystemProcess systemProcess) {
-
-    }
 
 }

@@ -22,15 +22,21 @@ public abstract class Scheduler implements Runnable {
     public void addProcess(SystemProcess systemProcess) {
 
         systemProcess.setState(State.READY);
-        //set first cpu burst to cpuburstremaining
+        //set first cpu burst to cpuBurstRemaining
         if (systemProcess.getCpuBurstRemaining() == 0 && !systemProcess.getCpuBurstQueue().isEmpty()) {
             systemProcess.setCpuBurstRemaining(systemProcess.getCpuBurstQueue().remove(0));
         }
-        //set first io to ioburstremaining
+        //set first io to ioBurstRemaining
         if (systemProcess.getIoBurstRemaining() == 0 && !systemProcess.getIoBurstQueue().isEmpty()) {
             systemProcess.setIoBurstRemaining(systemProcess.getIoBurstQueue().remove(0));
         }
         readyQueue.add(systemProcess);
+    }
+
+    public void printWhatIsProcessing() {
+        for (SystemProcess systemProcess : readyQueue) {
+            System.out.println("Ready Queue: " + systemProcess.getName());
+        }
     }
 
     public void terminateIfCpuComplete() {
@@ -52,7 +58,6 @@ public abstract class Scheduler implements Runnable {
             ioCurrentProcess = null;
         }
     }
-
 
     public abstract SystemProcess getNextProcess();
     //method for calculating running time from cpu burst
