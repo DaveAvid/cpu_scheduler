@@ -1,8 +1,0 @@
-com/os/Main.class
-com/os/algorithms/RoundRobinScheduler.class
-com/os/models/SystemProcess.class
-com/os/algorithms/ShortJobFirstScheduler.class
-com/os/controller/Scheduler.class
-com/os/algorithms/PriorityScheduler.class
-com/os/models/State.class
-com/os/algorithms/FirstComeFirstServedScheduler.class
