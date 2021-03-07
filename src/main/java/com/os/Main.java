@@ -2,6 +2,7 @@ package com.os;
 
 import com.os.algorithms.FirstComeFirstServedScheduler;
 import com.os.algorithms.PriorityScheduler;
+import com.os.algorithms.RoundRobinScheduler;
 import com.os.algorithms.ShortJobFirstScheduler;
 import com.os.controller.Scheduler;
 import com.os.models.SystemProcess;
@@ -10,40 +11,78 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
 
     public static void main(String[] args) throws InterruptedException {
+        printSchedulerMenu();
 
+    }
+
+    public static void printSchedulerMenu() {
         //create one instance of scheduler
         Scheduler firstComeFirstServedScheduler = new FirstComeFirstServedScheduler();
         Scheduler shortJobFirstScheduler = new ShortJobFirstScheduler();
-        Scheduler scheduler = new PriorityScheduler();
-        readJobsFromFile("scenario.txt", scheduler);
+        Scheduler priorityScheduler = new PriorityScheduler();
+        Scheduler roundRobinScheduler = new RoundRobinScheduler();
+        while (true) {
+            try {
+                System.out.println("____________Cpu Scheduling Simulation____________");
+                System.out.println("Please Select a Scheduling Alrogithm: ");
+                System.out.println();
+                int userChoice = printMenuTextVariableOptions("1 -- First Come First Served. " + "\n" + "2 -- Priority."
+                        + "\n" + "3 -- Round Robin.\n" + "4 -- Shortest Job First\n" + "5 -- Exit\n", 1, 5);
+                if (userChoice == 1) {
+                    readJobsFromFile("scenario.txt", firstComeFirstServedScheduler);
+                    startSchedulerThread(firstComeFirstServedScheduler);
+                } else if (userChoice == 2) {
+                    readJobsFromFile("scenario.txt", priorityScheduler);
+                    startSchedulerThread(priorityScheduler);
+                } else if (userChoice == 3) {
+                    readJobsFromFile("scenario.txt", roundRobinScheduler);
+                    startSchedulerThread(roundRobinScheduler);
+                } else if (userChoice == 4) {
+                    readJobsFromFile("scenario.txt", shortJobFirstScheduler);
+                    startSchedulerThread(shortJobFirstScheduler);
+                } else if (userChoice == 5) {
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Error has occured.");
+            }
+        }
+    }
 
-        //create new process from file(TOODO), currently hardcoded
-//        {
-//            int[] cpuBurst = new int[]{5, 8, 9};
-//            int[] ioBurst = new int[]{4, 2};
-//            SystemProcess systemProcess = new SystemProcess("apache", 3, 2, cpuBurst, ioBurst);
-//            //add process to scheduler
-//            priorityScheduler.addProcess(systemProcess);
-//        }
-//        {
-//            int[] cpuBurst = new int[]{6, 7, 10};
-//            int[] ioBurst = new int[]{5, 3};
-//            SystemProcess systemProcess = new SystemProcess("french", 2, 1, cpuBurst, ioBurst);
-//            //add process to scheduler
-//            priorityScheduler.addProcess(systemProcess);
-//        }
+    public static int printMenuTextVariableOptions(String menuText, int min, int max) {
+        Scanner console = new Scanner(System.in);
+        int userInput = 0;
+        while (true) {
+            try {
+                System.out.println(menuText + "\n");
+                System.out.print("Choose a number " + min + "-" + max + ": ");
+                userInput = console.nextInt();
+
+                if (userInput < min || userInput > max) {
+                    throw new Exception();
+                }
+
+                System.out.println();
+
+                break;
+            } catch (Exception e) {
+                System.out.println("\n** Enter a number" + min + "-" + max + "**\n");
+            }
+        }
+        return userInput;
+    }
 
 
-        //start scheduler thread
-        Thread prioritySchedulerThread = new Thread(scheduler);
-        prioritySchedulerThread.sleep(100);
-        prioritySchedulerThread.start();
-
+    private static void startSchedulerThread(Scheduler scheduler) throws InterruptedException {
+        Thread thread = new Thread(scheduler);
+        thread.sleep(100);
+        thread.start();
     }
 
     public static void readJobsFromFile(String fileName, Scheduler scheduler) {
@@ -54,16 +93,12 @@ public class Main {
             String name;
             int arrivalTime;
             int priorityLevel;
-            int counter = 0;
-
-            List<SystemProcess> processList = new ArrayList<>();
             List<Integer> cpuBurstList = new ArrayList<>();
             List<Integer> ioBurstList = new ArrayList<>();
             String line;
+            //loop through all the processes in the file
             while (bufferedReader != null) {
                 int i = 0;
-                //loop through all the processes in the file
-
                 line = bufferedReader.readLine();
                 String processSplit[] = line.split(" ");
                 name = processSplit[i];
@@ -81,21 +116,15 @@ public class Main {
 
                 SystemProcess newProcess = new SystemProcess(name, arrivalTime, priorityLevel, cpuBurstList, ioBurstList);
                 scheduler.addProcess(newProcess);
-                processList.add(newProcess);
                 cpuBurstList.removeAll(cpuBurstList);
                 ioBurstList.removeAll(ioBurstList);
-                counter++;
                 if (bufferedReader == null) {
                     bufferedReader.close();
                 }
             }
-
-
         } catch (Exception e) {
             System.out.println("File Not Found or File Done Processing.");
         }
-
-
     }
 }
 

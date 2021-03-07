@@ -56,6 +56,7 @@ public abstract class Scheduler implements Runnable {
     }
 
     public void printSchedulerOutput() {
+        System.out.println();
         System.out.println("System Time: " + runningTime);
         //Print where processes are in which queues
         String printReadyQueue = "Ready Queue: ";

@@ -37,6 +37,7 @@ public class ShortJobFirstScheduler extends Scheduler {
                     moveCurrentProcessToReadyQueue();
 
                 }
+                printSchedulerOutput();
                 terminateIfCpuComplete();
                 terminateIfIoComplete();
                 completionTime = runningTime;

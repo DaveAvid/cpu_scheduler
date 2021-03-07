@@ -44,8 +44,7 @@ public class PriorityScheduler extends Scheduler {
             }
         }
     }
-//add more processes
-    //confirm by hand
+
 
     private void moveCurrentProcessToIoWaitQueue() {
 
@@ -53,10 +52,9 @@ public class PriorityScheduler extends Scheduler {
         if (cpuCurrentProcess.getCpuBurstRemaining() == 0 && !cpuCurrentProcess.getCpuBurstQueue().isEmpty()) {
             cpuCurrentProcess.setCpuBurstRemaining(cpuCurrentProcess.getCpuBurstQueue().remove(0));
         }
-        SystemProcess tempProcess = null;
-        tempProcess = cpuCurrentProcess;
-//        cpuCurrentProcess = null;
+
         ioWaitQueue.add(cpuCurrentProcess);
+
         cpuCurrentProcess = null;
     }
 
