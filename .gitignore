@@ -6,11 +6,11 @@
 
 # BlueJ files
 *.ctxt
-
+# Directories
+.target/
+.idea
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-.idea/
-*.idea/
 # Package Files #
 *.jar
 *.war

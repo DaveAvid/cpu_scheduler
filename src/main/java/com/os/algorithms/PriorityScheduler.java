@@ -48,10 +48,14 @@ public class PriorityScheduler extends Scheduler {
     //confirm by hand
 
     private void moveCurrentProcessToIoWaitQueue() {
+
         //set first cpu burst to cpuburstremaining
         if (cpuCurrentProcess.getCpuBurstRemaining() == 0 && !cpuCurrentProcess.getCpuBurstQueue().isEmpty()) {
             cpuCurrentProcess.setCpuBurstRemaining(cpuCurrentProcess.getCpuBurstQueue().remove(0));
         }
+        SystemProcess tempProcess = null;
+        tempProcess = cpuCurrentProcess;
+//        cpuCurrentProcess = null;
         ioWaitQueue.add(cpuCurrentProcess);
         cpuCurrentProcess = null;
     }
@@ -73,7 +77,7 @@ public class PriorityScheduler extends Scheduler {
         SystemProcess foundProcess = null;
         //iterate through list of processes
         for (SystemProcess process : readyQueue) {
-            if (process.getPriorityLevel() > runningTime) {
+            if (process.getArrivalTime() > runningTime) {
                 continue;
             }
             //create a base case, set found process to process so we have something to compare to

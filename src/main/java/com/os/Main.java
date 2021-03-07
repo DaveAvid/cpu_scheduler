@@ -44,9 +44,6 @@ public class Main {
         prioritySchedulerThread.sleep(100);
         prioritySchedulerThread.start();
 
-//        Thread firstComeFirstServed = new Thread(firstComeFirstServedScheduler);
-//        firstComeFirstServed.sleep(100);
-//        firstComeFirstServed.start();
     }
 
     public static void readJobsFromFile(String fileName, Scheduler scheduler) {
@@ -58,43 +55,44 @@ public class Main {
             int arrivalTime;
             int priorityLevel;
             int counter = 0;
+
             List<SystemProcess> processList = new ArrayList<>();
             List<Integer> cpuBurstList = new ArrayList<>();
             List<Integer> ioBurstList = new ArrayList<>();
             String line;
             while (bufferedReader != null) {
+                int i = 0;
                 //loop through all the processes in the file
-                for (int i = 0; i <= counter; i++) {
-                    line = bufferedReader.readLine();
-                    String processSplit[] = line.split(" ");
-                    name = processSplit[i];
-                    arrivalTime = Integer.parseInt(processSplit[i + 1]);
-                    priorityLevel = Integer.parseInt(processSplit[i + 2]);
 
-                    for (int j = 3; j < processSplit.length; j += 2) {
-                        cpuBurstList.add(Integer.parseInt(processSplit[j]));
+                line = bufferedReader.readLine();
+                String processSplit[] = line.split(" ");
+                name = processSplit[i];
+                arrivalTime = Integer.parseInt(processSplit[i + 1]);
+                priorityLevel = Integer.parseInt(processSplit[i + 2]);
 
-                    }
-                    for (int n = 4; n < processSplit.length; n += 2) {
-                        ioBurstList.add(Integer.parseInt(processSplit[n]));
+                for (int j = 3; j < processSplit.length; j += 2) {
+                    cpuBurstList.add(Integer.parseInt(processSplit[j]));
 
-                    }
+                }
+                for (int n = 4; n < processSplit.length; n += 2) {
+                    ioBurstList.add(Integer.parseInt(processSplit[n]));
 
-                    SystemProcess newProcess = new SystemProcess(name, arrivalTime, priorityLevel, cpuBurstList, ioBurstList);
-                    scheduler.addProcess(newProcess);
-                    processList.add(newProcess);
-                    cpuBurstList.removeAll(cpuBurstList);
-                    ioBurstList.removeAll(ioBurstList);
-                    counter++;
-                    if (bufferedReader == null) {
-                        bufferedReader.close();
-                    }
                 }
 
+                SystemProcess newProcess = new SystemProcess(name, arrivalTime, priorityLevel, cpuBurstList, ioBurstList);
+                scheduler.addProcess(newProcess);
+                processList.add(newProcess);
+                cpuBurstList.removeAll(cpuBurstList);
+                ioBurstList.removeAll(ioBurstList);
+                counter++;
+                if (bufferedReader == null) {
+                    bufferedReader.close();
+                }
             }
 
+
         } catch (Exception e) {
-            System.out.println("File Not Found.");
+            System.out.println("File Not Found or File Done Processing.");
         }
 
 

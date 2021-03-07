@@ -78,10 +78,10 @@ public abstract class Scheduler implements Runnable {
         //Print data to show which processes are in the CPU or the I/O
         System.out.println(printIoWaitQueue);
         if (cpuCurrentProcess != null) {
-            System.out.println("CPU: [" + cpuCurrentProcess.getName() + "]");
+            System.out.println("CPU: [" + cpuCurrentProcess.getName() + "] " + "State: " + "[ " + cpuCurrentProcess.getState() + "]");
         }
         if (ioCurrentProcess != null) {
-            System.out.println("I/O: [" + ioCurrentProcess.getName() + "]");
+            System.out.println("I/O: [" + ioCurrentProcess.getName() + "] " + "State: " + "[ " + ioCurrentProcess.getState() + "]");
         }
 
     }
