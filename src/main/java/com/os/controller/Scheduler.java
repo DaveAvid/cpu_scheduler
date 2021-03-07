@@ -11,9 +11,11 @@ import java.util.Queue;
 
 public abstract class Scheduler implements Runnable {
 
+
     protected Queue<SystemProcess> readyQueue = new LinkedList<SystemProcess>();
     protected boolean IS_RUNNING = false;
     protected int runningTime = 0;
+    protected int completionTime = 0;
     protected SystemProcess cpuCurrentProcess;
     protected SystemProcess ioCurrentProcess;
     protected Queue<SystemProcess> ioWaitQueue = new LinkedList<>();
@@ -33,7 +35,6 @@ public abstract class Scheduler implements Runnable {
         readyQueue.add(systemProcess);
     }
 
-
     public void terminateIfCpuComplete() {
         if (cpuCurrentProcess != null && !cpuCurrentProcess.cpuHasBurstRemaining() &&
                 !cpuCurrentProcess.cpuHasAdditionalBurstsInList() &&
@@ -52,6 +53,41 @@ public abstract class Scheduler implements Runnable {
             terminatedProcessList.add(ioCurrentProcess);
             ioCurrentProcess = null;
         }
+    }
+
+    public void printSchedulerOutput() {
+        System.out.println("System Time: " + runningTime);
+        //Print where processes are in which queues
+        String printReadyQueue = "Ready Queue: ";
+        if (readyQueue.isEmpty()) {
+            printReadyQueue += " EMPTY";
+        } else {
+            for (SystemProcess systemProcess : readyQueue) {
+                printReadyQueue += " [" + systemProcess.getName() + "]";
+            }
+        }
+        System.out.println(printReadyQueue);
+        String printIoWaitQueue = "I/O Wait Queue: ";
+        if (ioWaitQueue.isEmpty()) {
+            printIoWaitQueue += " EMPTY";
+        } else {
+            for (SystemProcess systemProcess : ioWaitQueue) {
+                printIoWaitQueue += " [" + systemProcess.getName() + "]";
+            }
+        }
+        //Print data to show which processes are in the CPU or the I/O
+        System.out.println(printIoWaitQueue);
+        if (cpuCurrentProcess != null) {
+            System.out.println("CPU: [" + cpuCurrentProcess.getName() + "]");
+        }
+        if (ioCurrentProcess != null) {
+            System.out.println("I/O: [" + ioCurrentProcess.getName() + "]");
+        }
+
+    }
+
+    public Queue<SystemProcess> getReadyQueue() {
+        return readyQueue;
     }
 
     public abstract SystemProcess getNextProcess();

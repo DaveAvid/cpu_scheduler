@@ -8,6 +8,7 @@ public class PriorityScheduler extends Scheduler {
     public void run() {
         IS_RUNNING = true;
         while (IS_RUNNING) {
+
             try {
                 if (cpuCurrentProcess == null) {
                     cpuCurrentProcess = getNextProcess();
@@ -33,11 +34,13 @@ public class PriorityScheduler extends Scheduler {
                     moveCurrentProcessToReadyQueue();
 
                 }
+                printSchedulerOutput();
                 terminateIfCpuComplete();
                 terminateIfIoComplete();
 
             } finally {
                 runningTime++;
+                completionTime = runningTime;
             }
         }
     }
@@ -70,7 +73,7 @@ public class PriorityScheduler extends Scheduler {
         SystemProcess foundProcess = null;
         //iterate through list of processes
         for (SystemProcess process : readyQueue) {
-            if (process.getArrivalTime() > runningTime) {
+            if (process.getPriorityLevel() > runningTime) {
                 continue;
             }
             //create a base case, set found process to process so we have something to compare to

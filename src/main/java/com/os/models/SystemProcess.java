@@ -20,7 +20,8 @@ public class SystemProcess {
     private int ioBurstRemaining = 0;
     private State state;
 
-
+    //wait time is io burst time and how long it waits in the ready queue
+//completion time - arrival time
     public SystemProcess(String name, int arrivalTime, int priorityLevel, int[] cpuBurst, int[] ioBurst) {
         this.name = name;
         this.pid = getNextPid();
@@ -28,6 +29,9 @@ public class SystemProcess {
         this.priorityLevel = priorityLevel;
         int totalIoTime = 0;
         int totalCpuTime = 0;
+        //all the time that it is running
+        //take this and subtract the total amount of time it is in my simulator
+        //whatever is left is my wait time
         for (int cpu : cpuBurst) {
             cpuBurstQueue.add(cpu);
             totalCpuTime += cpu;
