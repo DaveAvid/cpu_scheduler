@@ -20,9 +20,10 @@ public class SystemProcess {
     private int ioBurstRemaining = 0;
     private State state;
 
+
     //wait time is io burst time and how long it waits in the ready queue
 //completion time - arrival time
-    public SystemProcess(String name, int arrivalTime, int priorityLevel, int[] cpuBurst, int[] ioBurst) {
+    public SystemProcess(String name, int arrivalTime, int priorityLevel, List<Integer> cpuBurst, List<Integer> ioBurst) {
         this.name = name;
         this.pid = getNextPid();
         this.arrivalTime = arrivalTime;
@@ -46,6 +47,7 @@ public class SystemProcess {
         waitTime = totalCpuTime;
         state = State.NEW;
     }
+
 
     public static int getNextPid() {
         PID_COUNTER++;

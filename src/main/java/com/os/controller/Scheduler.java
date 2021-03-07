@@ -60,7 +60,7 @@ public abstract class Scheduler implements Runnable {
         //Print where processes are in which queues
         String printReadyQueue = "Ready Queue: ";
         if (readyQueue.isEmpty()) {
-            printReadyQueue += " EMPTY";
+            printReadyQueue += " Empty";
         } else {
             for (SystemProcess systemProcess : readyQueue) {
                 printReadyQueue += " [" + systemProcess.getName() + "]";
@@ -69,7 +69,7 @@ public abstract class Scheduler implements Runnable {
         System.out.println(printReadyQueue);
         String printIoWaitQueue = "I/O Wait Queue: ";
         if (ioWaitQueue.isEmpty()) {
-            printIoWaitQueue += " EMPTY";
+            printIoWaitQueue += " Empty";
         } else {
             for (SystemProcess systemProcess : ioWaitQueue) {
                 printIoWaitQueue += " [" + systemProcess.getName() + "]";
