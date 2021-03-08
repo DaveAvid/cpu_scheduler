@@ -47,6 +47,8 @@ public class Main {
                     readJobsFromFile("scenario.txt", shortJobFirstScheduler);
                     startSchedulerThread(shortJobFirstScheduler);
                 } else if (userChoice == 5) {
+                    System.out.println("Thanks for using this program!");
+                    System.exit(0);
                     break;
                 }
             } catch (Exception e) {
@@ -55,12 +57,13 @@ public class Main {
         }
     }
 
+
     public static int printMenuTextVariableOptions(String menuText, int min, int max) {
         Scanner console = new Scanner(System.in);
         int userInput = 0;
         while (true) {
             try {
-                System.out.println(menuText + "\n");
+                System.out.print(menuText + "\n");
                 System.out.print("Choose a number " + min + "-" + max + ": ");
                 userInput = console.nextInt();
 
