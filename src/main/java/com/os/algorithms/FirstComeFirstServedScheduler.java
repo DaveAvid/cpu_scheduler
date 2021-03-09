@@ -12,21 +12,21 @@ public class FirstComeFirstServedScheduler extends Scheduler {
             try {
                 if (cpuCurrentProcess == null) {
                     cpuCurrentProcess = getNextProcess();
-                    if (cpuCurrentProcess == null) {
-                        continue;
-                    }
+
                 }
                 if (ioCurrentProcess == null) {
                     ioCurrentProcess = getNextIoProcess();
                 }
-
-                if (cpuCurrentProcess.cpuHasBurstRemaining()) {
+                if (cpuCurrentProcess == null && ioCurrentProcess == null) {
+                    continue;
+                }
+                if (cpuCurrentProcess != null && cpuCurrentProcess.cpuHasBurstRemaining()) {
                     cpuCurrentProcess.decrementCpuBurstTime();
                 }
                 if (ioCurrentProcess != null && ioCurrentProcess.ioHasBurstRemaining()) {
                     ioCurrentProcess.decrementIoBurst();
                 }
-                if (cpuCurrentProcess.cpuHasBurstRemaining() == false && cpuCurrentProcess.ioHasBurstRemaining() == true) {
+                if (cpuCurrentProcess != null && cpuCurrentProcess.cpuHasBurstRemaining() == false && cpuCurrentProcess.ioHasBurstRemaining() == true) {
                     moveCurrentProcessToIoWaitQueue();
 
                 }

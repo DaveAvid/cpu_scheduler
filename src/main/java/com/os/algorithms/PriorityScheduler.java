@@ -12,21 +12,21 @@ public class PriorityScheduler extends Scheduler {
             try {
                 if (cpuCurrentProcess == null) {
                     cpuCurrentProcess = getNextProcess();
-                    if (cpuCurrentProcess == null) {
-                        continue;
-                    }
+
                 }
                 if (ioCurrentProcess == null) {
                     ioCurrentProcess = getNextIoProcess();
                 }
-
-                if (cpuCurrentProcess.cpuHasBurstRemaining()) {
+                if (cpuCurrentProcess == null && ioCurrentProcess == null) {
+                    continue;
+                }
+                if (cpuCurrentProcess != null && cpuCurrentProcess.cpuHasBurstRemaining()) {
                     cpuCurrentProcess.decrementCpuBurstTime();
                 }
                 if (ioCurrentProcess != null && ioCurrentProcess.ioHasBurstRemaining()) {
                     ioCurrentProcess.decrementIoBurst();
                 }
-                if (!cpuCurrentProcess.cpuHasBurstRemaining() && cpuCurrentProcess.ioHasBurstRemaining()) {
+                if (cpuCurrentProcess != null && !cpuCurrentProcess.cpuHasBurstRemaining() && cpuCurrentProcess.ioHasBurstRemaining()) {
                     moveCurrentProcessToIoWaitQueue();
 
                 }

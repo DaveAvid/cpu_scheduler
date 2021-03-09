@@ -9,40 +9,39 @@ public class ShortJobFirstScheduler extends Scheduler {
     public void run() {
         IS_RUNNING = true;
         while (IS_RUNNING) {
+
             try {
-
-//                System.out.println("Current System Time: " + runningTime);
-
                 if (cpuCurrentProcess == null) {
                     cpuCurrentProcess = getNextProcess();
-                    if (cpuCurrentProcess == null) {
-                        continue;
-                    }
+
                 }
                 if (ioCurrentProcess == null) {
                     ioCurrentProcess = getNextIoProcess();
                 }
-
-                if (cpuCurrentProcess.cpuHasBurstRemaining()) {
+                if (cpuCurrentProcess == null && ioCurrentProcess == null) {
+                    continue;
+                }
+                if (cpuCurrentProcess != null && cpuCurrentProcess.cpuHasBurstRemaining()) {
                     cpuCurrentProcess.decrementCpuBurstTime();
                 }
                 if (ioCurrentProcess != null && ioCurrentProcess.ioHasBurstRemaining()) {
                     ioCurrentProcess.decrementIoBurst();
                 }
-                if (cpuCurrentProcess.cpuHasBurstRemaining() == false && cpuCurrentProcess.ioHasBurstRemaining() == true) {
+                if (cpuCurrentProcess != null && !cpuCurrentProcess.cpuHasBurstRemaining() && cpuCurrentProcess.ioHasBurstRemaining()) {
                     moveCurrentProcessToIoWaitQueue();
 
                 }
-                if (ioCurrentProcess != null && ioCurrentProcess.cpuHasBurstRemaining() == true && ioCurrentProcess.ioHasBurstRemaining() == false) {
+                if (ioCurrentProcess != null && ioCurrentProcess.cpuHasBurstRemaining() && !ioCurrentProcess.ioHasBurstRemaining()) {
                     moveCurrentProcessToReadyQueue();
 
                 }
                 printSchedulerOutput();
                 terminateIfCpuComplete();
                 terminateIfIoComplete();
-                completionTime = runningTime;
+
             } finally {
                 runningTime++;
+                completionTime = runningTime;
             }
         }
     }
