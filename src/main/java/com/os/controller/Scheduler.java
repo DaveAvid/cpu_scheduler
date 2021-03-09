@@ -13,12 +13,13 @@ public abstract class Scheduler implements Runnable {
 
 
     protected Queue<SystemProcess> readyQueue = new LinkedList<SystemProcess>();
+    protected Queue<SystemProcess> ioWaitQueue = new LinkedList<SystemProcess>();
     protected boolean IS_RUNNING = false;
     protected int runningTime = 0;
     protected int completionTime = 0;
     protected SystemProcess cpuCurrentProcess;
     protected SystemProcess ioCurrentProcess;
-    protected Queue<SystemProcess> ioWaitQueue = new LinkedList<>();
+
     protected List<SystemProcess> terminatedProcessList = new ArrayList<>();
 
     public void addProcess(SystemProcess systemProcess) {

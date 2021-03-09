@@ -10,8 +10,6 @@ public class FirstComeFirstServedScheduler extends Scheduler {
         IS_RUNNING = true;
         while (IS_RUNNING) {
             try {
-
-
                 if (cpuCurrentProcess == null) {
                     cpuCurrentProcess = getNextProcess();
                     if (cpuCurrentProcess == null) {
