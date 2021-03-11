@@ -34,9 +34,9 @@ public class PriorityScheduler extends Scheduler {
                     moveCurrentProcessToReadyQueue();
 
                 }
-                printSchedulerOutput();
                 terminateIfCpuComplete();
                 terminateIfIoComplete();
+                printSchedulerOutput();
 
             } finally {
                 runningTime++;

@@ -34,17 +34,15 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                     moveCurrentProcessToReadyQueue();
 
                 }
-                printSchedulerOutput();
                 terminateIfCpuComplete();
                 terminateIfIoComplete();
+                printSchedulerOutput();
 
             } finally {
                 runningTime++;
             }
         }
     }
-//add more processes
-    //confirm by hand
 
     private void moveCurrentProcessToIoWaitQueue() {
         //set first cpu burst to cpuburstremaining
