@@ -18,7 +18,7 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                     ioCurrentProcess = getNextIoProcess();
                 }
                 incrementIoQueueWaitTime();
-                incrementReadyQueueWaitTimes();
+                incrementReadyQueueWaitTime();
                 if (cpuCurrentProcess == null && ioCurrentProcess == null) {
                     continue;
                 }

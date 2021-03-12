@@ -56,7 +56,7 @@ public abstract class Scheduler implements Runnable {
         }
     }
 
-    public void incrementReadyQueueWaitTimes() {
+    public void incrementReadyQueueWaitTime() {
         for (SystemProcess systemProcess : readyQueue) {
             if (runningTime > systemProcess.getArrivalTime()) {
                 systemProcess.incrementReadyQueueWaitTime();
