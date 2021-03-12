@@ -12,7 +12,7 @@ public class SystemProcess {
     final private int priorityLevel;
     final private List<Integer> cpuBurstQueue = new ArrayList<Integer>();
     final private List<Integer> ioBurstQueue = new ArrayList<Integer>();
-    final private int turnaroundTime;
+    private int turnaroundTime;
     private int ioQueueWaitTime;
     private int readyQueueWaitTime;
     private int completionTime;
@@ -122,6 +122,10 @@ public class SystemProcess {
 
     public State getState() {
         return state;
+    }
+
+    public void setTurnaroundTime(int turnaroundTime){
+        this.turnaroundTime = turnaroundTime;
     }
 
     public void setState(State state) {

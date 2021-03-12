@@ -44,6 +44,7 @@ public abstract class Scheduler implements Runnable {
                 !cpuCurrentProcess.cpuHasAdditionalBurstsInList() &&
                 !cpuCurrentProcess.ioHasAdditionalBurstInList()) {
             cpuCurrentProcess.setState(State.TERMINATED);
+            cpuCurrentProcess.setTurnaroundTime(cpuCurrentProcess.getCompletionTime() - cpuCurrentProcess.getArrivalTime());
             terminatedProcessList.add(cpuCurrentProcess);
             cpuCurrentProcess = null;
         }

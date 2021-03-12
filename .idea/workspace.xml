@@ -7,8 +7,6 @@
     <list default="true" id="2d8f6b2b-01ea-46f1-81cd-56f0ac3ab13b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/os/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/PriorityScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/PriorityScheduler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/os/models/SystemProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/models/SystemProcess.java" afterDir="false" />
     </list>
@@ -309,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615574917921</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="METRICS">
+      <created>1615592020109</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1615592020110</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -340,8 +345,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java</url>
-          <line>70</line>
-          <option name="timeStamp" value="114" />
+          <line>45</line>
+          <option name="timeStamp" value="115" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

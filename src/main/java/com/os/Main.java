@@ -65,6 +65,7 @@ public class Main {
     }
 
     public static void printToFile(){
+            //call terminated list to print to file
 
     }
 
