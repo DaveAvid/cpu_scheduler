@@ -11,15 +11,15 @@ import java.util.Queue;
 
 public abstract class Scheduler implements Runnable {
 
-
     protected Queue<SystemProcess> readyQueue = new LinkedList<SystemProcess>();
     protected Queue<SystemProcess> ioWaitQueue = new LinkedList<SystemProcess>();
     protected boolean IS_RUNNING = false;
     protected int runningTime = 0;
     protected int completionTime = 0;
+    protected int ioQueueWaitTime = 0;
+    protected int readyQueueWaitTime = 0;
     protected SystemProcess cpuCurrentProcess;
     protected SystemProcess ioCurrentProcess;
-
     protected List<SystemProcess> terminatedProcessList = new ArrayList<>();
 
     public void addProcess(SystemProcess systemProcess) {
@@ -56,6 +56,20 @@ public abstract class Scheduler implements Runnable {
         }
     }
 
+    public void incrementReadyQueueWaitTimes() {
+        for (SystemProcess systemProcess : readyQueue) {
+            if (runningTime > systemProcess.getArrivalTime()) {
+                systemProcess.incrementReadyQueueWaitTime();
+            }
+        }
+    }
+
+    public void incrementIoQueueWaitTime() {
+        for (SystemProcess systemProcess : ioWaitQueue) {
+            systemProcess.incrementIoQueueWaitTime();
+        }
+    }
+
     public void printSchedulerOutput() {
         System.out.println();
         System.out.println("System Time: " + runningTime);
@@ -81,10 +95,13 @@ public abstract class Scheduler implements Runnable {
         System.out.println(printIoWaitQueue);
         if (cpuCurrentProcess != null) {
             System.out.println("CPU: [" + cpuCurrentProcess.getName() + "] " + "State: " + "[ " + cpuCurrentProcess.getState() + "]");
+            System.out.println("Ready Queue Wait Time: " + cpuCurrentProcess.getReadyQueueWaitTime());
         }
         if (ioCurrentProcess != null) {
             System.out.println("I/O: [" + ioCurrentProcess.getName() + "] " + "State: " + "[ " + ioCurrentProcess.getState() + "]");
+            System.out.println("Io Wait Time: " + ioCurrentProcess.getIoQueueWaitTime());
         }
+
 
     }
 

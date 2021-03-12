@@ -12,9 +12,9 @@ public class SystemProcess {
     final private int priorityLevel;
     final private List<Integer> cpuBurstQueue = new ArrayList<Integer>();
     final private List<Integer> ioBurstQueue = new ArrayList<Integer>();
-    final private int ioWaitTime;
-    final private int waitTime;
     final private int turnaroundTime;
+    private int ioQueueWaitTime;
+    private int readyQueueWaitTime;
     private int completionTime;
     private int cpuBurstRemaining = 0;
     private int ioBurstRemaining = 0;
@@ -43,8 +43,8 @@ public class SystemProcess {
         }
         turnaroundTime = totalCpuTime + totalIoTime;
         completionTime = turnaroundTime;
-        ioWaitTime = totalIoTime;
-        waitTime = totalCpuTime;
+        ioQueueWaitTime = 0;
+        readyQueueWaitTime = 0;
         state = State.NEW;
     }
 
@@ -84,12 +84,12 @@ public class SystemProcess {
         return priorityLevel;
     }
 
-    public int getIoWaitTime() {
-        return ioWaitTime;
+    public int getIoQueueWaitTime() {
+        return ioQueueWaitTime;
     }
 
-    public int getWaitTime() {
-        return waitTime;
+    public int getReadyQueueWaitTime() {
+        return readyQueueWaitTime;
     }
 
     public int getTurnaroundTime() {
@@ -161,11 +161,16 @@ public class SystemProcess {
     }
 
     public void decrementIoBurst() {
-
-
         ioBurstRemaining--;
     }
 
+    public void incrementReadyQueueWaitTime() {
+        readyQueueWaitTime++;
+    }
+
+    public void incrementIoQueueWaitTime() {
+        ioQueueWaitTime++;
+    }
 
     @Override
     public String toString() {
@@ -176,8 +181,8 @@ public class SystemProcess {
                 .append("priorityLevel", priorityLevel)
                 .append("cpuBurstQueue", cpuBurstQueue)
                 .append("ioBurstQueue", ioBurstQueue)
-                .append("ioWaitTime", ioWaitTime)
-                .append("waitTime", waitTime)
+                .append("ioWaitTime", ioQueueWaitTime)
+                .append("waitTime", readyQueueWaitTime)
                 .append("turnaroundTime", turnaroundTime)
                 .append("completionTime", completionTime)
                 .append("cpuBurstRemaining", cpuBurstRemaining)

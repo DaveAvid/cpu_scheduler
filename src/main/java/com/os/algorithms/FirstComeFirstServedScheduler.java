@@ -17,6 +17,8 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                 if (ioCurrentProcess == null) {
                     ioCurrentProcess = getNextIoProcess();
                 }
+                incrementIoQueueWaitTime();
+                incrementReadyQueueWaitTimes();
                 if (cpuCurrentProcess == null && ioCurrentProcess == null) {
                     continue;
                 }
@@ -59,6 +61,7 @@ public class FirstComeFirstServedScheduler extends Scheduler {
             ioCurrentProcess.setIoBurstRemaining(ioCurrentProcess.getIoBurstQueue().remove(0));
         }
         readyQueue.add(ioCurrentProcess);
+
         ioCurrentProcess = null;
     }
 
