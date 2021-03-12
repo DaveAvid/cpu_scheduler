@@ -16,8 +16,8 @@ public abstract class Scheduler implements Runnable {
     protected boolean IS_RUNNING = false;
     protected int runningTime = 0;
     protected int completionTime = 0;
-    protected int ioQueueWaitTime = 0;
-    protected int readyQueueWaitTime = 0;
+    protected int totalIoQueueWaitTime = 0;
+    protected int totalReadyQueueWaitTime = 0;
     protected SystemProcess cpuCurrentProcess;
     protected SystemProcess ioCurrentProcess;
     protected List<SystemProcess> terminatedProcessList = new ArrayList<>();
@@ -60,6 +60,7 @@ public abstract class Scheduler implements Runnable {
         for (SystemProcess systemProcess : readyQueue) {
             if (runningTime > systemProcess.getArrivalTime()) {
                 systemProcess.incrementReadyQueueWaitTime();
+                totalReadyQueueWaitTime += systemProcess.getReadyQueueWaitTime();
             }
         }
     }
@@ -67,6 +68,7 @@ public abstract class Scheduler implements Runnable {
     public void incrementIoQueueWaitTime() {
         for (SystemProcess systemProcess : ioWaitQueue) {
             systemProcess.incrementIoQueueWaitTime();
+            totalIoQueueWaitTime += systemProcess.getIoQueueWaitTime();
         }
     }
 
@@ -95,11 +97,11 @@ public abstract class Scheduler implements Runnable {
         System.out.println(printIoWaitQueue);
         if (cpuCurrentProcess != null) {
             System.out.println("CPU: [" + cpuCurrentProcess.getName() + "] " + "State: " + "[ " + cpuCurrentProcess.getState() + "]");
-            System.out.println("Ready Queue Wait Time: " + cpuCurrentProcess.getReadyQueueWaitTime());
+            System.out.println("Ready Queue Wait Time: " + totalReadyQueueWaitTime);
         }
         if (ioCurrentProcess != null) {
             System.out.println("I/O: [" + ioCurrentProcess.getName() + "] " + "State: " + "[ " + ioCurrentProcess.getState() + "]");
-            System.out.println("Io Wait Time: " + ioCurrentProcess.getIoQueueWaitTime());
+            System.out.println("Io Wait Time: " + totalIoQueueWaitTime);
         }
 
 
