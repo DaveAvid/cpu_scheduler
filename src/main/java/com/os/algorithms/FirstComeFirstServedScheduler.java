@@ -4,6 +4,8 @@ import com.os.controller.Scheduler;
 import com.os.models.State;
 import com.os.models.SystemProcess;
 
+import java.io.IOException;
+
 public class FirstComeFirstServedScheduler extends Scheduler {
 
     public void run() {
@@ -40,6 +42,8 @@ public class FirstComeFirstServedScheduler extends Scheduler {
                 terminateIfIoComplete();
                 printSchedulerOutput();
 
+            } catch (IOException e) {
+                e.printStackTrace();
             } finally {
                 runningTime++;
             }

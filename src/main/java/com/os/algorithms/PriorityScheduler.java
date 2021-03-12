@@ -4,8 +4,8 @@ import com.os.controller.Scheduler;
 import com.os.models.State;
 import com.os.models.SystemProcess;
 
-public class PriorityScheduler extends Scheduler {
-    public void run() {
+public class PriorityScheduler extends Scheduler  {
+    public void run() throws NullPointerException {
         IS_RUNNING = true;
         while (IS_RUNNING) {
 

@@ -41,8 +41,8 @@ public class SystemProcess {
             ioBurstQueue.add(io);
             totalIoTime += io;
         }
-        turnaroundTime = totalCpuTime + totalIoTime;
-        completionTime = turnaroundTime;
+        completionTime = totalCpuTime + totalIoTime;
+        turnaroundTime = totalCpuTime - arrivalTime;
         ioQueueWaitTime = 0;
         readyQueueWaitTime = 0;
         state = State.NEW;

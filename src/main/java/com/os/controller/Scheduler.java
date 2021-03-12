@@ -3,6 +3,9 @@ package com.os.controller;
 import com.os.models.State;
 import com.os.models.SystemProcess;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,14 +59,20 @@ public abstract class Scheduler implements Runnable {
         }
     }
 
-    public void incrementReadyQueueWaitTime() {
+    public void incrementReadyQueueWaitTime() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("scenario.txt"));
+        int lines = 0;
+        while (reader.readLine() != null) lines++;
+        reader.close();
         for (SystemProcess systemProcess : readyQueue) {
             if (runningTime > systemProcess.getArrivalTime()) {
                 systemProcess.incrementReadyQueueWaitTime();
                 totalReadyQueueWaitTime += systemProcess.getReadyQueueWaitTime();
+                totalReadyQueueWaitTime = totalReadyQueueWaitTime / lines;
             }
         }
     }
+
 
     public void incrementIoQueueWaitTime() {
         for (SystemProcess systemProcess : ioWaitQueue) {
@@ -72,9 +81,10 @@ public abstract class Scheduler implements Runnable {
         }
     }
 
-    public void printSchedulerOutput() {
+    public void printSchedulerOutput() throws NullPointerException{
         System.out.println();
         System.out.println("System Time: " + runningTime);
+
         //Print where processes are in which queues
         String printReadyQueue = "Ready Queue: ";
         if (readyQueue.isEmpty()) {
@@ -96,15 +106,26 @@ public abstract class Scheduler implements Runnable {
         //Print data to show which processes are in the CPU or the I/O
         System.out.println(printIoWaitQueue);
         if (cpuCurrentProcess != null) {
-            System.out.println("CPU: [" + cpuCurrentProcess.getName() + "] " + "State: " + "[ " + cpuCurrentProcess.getState() + "]");
+            System.out.println("CPU: [" + cpuCurrentProcess.getName() + "] " + "State: " + "[" + cpuCurrentProcess.getState() + "]");
             System.out.println("Ready Queue Wait Time: " + totalReadyQueueWaitTime);
         }
         if (ioCurrentProcess != null) {
-            System.out.println("I/O: [" + ioCurrentProcess.getName() + "] " + "State: " + "[ " + ioCurrentProcess.getState() + "]");
+            System.out.println("I/O: [" + ioCurrentProcess.getName() + "] " + "State: " + "[" + ioCurrentProcess.getState() + "]");
             System.out.println("Io Wait Time: " + totalIoQueueWaitTime);
         }
+    }
+
+    public void printMetrics() {
+        //CPU Utilization
 
 
+        //Throughput
+
+        //Turnaround Time
+        int turnAroundTime = completionTime - cpuCurrentProcess.getArrivalTime();
+        //Waiting Time
+        int waitingTime = turnAroundTime;
+        //Response Time
     }
 
     public Queue<SystemProcess> getReadyQueue() {
