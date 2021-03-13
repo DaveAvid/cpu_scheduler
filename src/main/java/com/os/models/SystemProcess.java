@@ -41,8 +41,6 @@ public class SystemProcess {
             ioBurstQueue.add(io);
             totalIoTime += io;
         }
-        completionTime = totalCpuTime + totalIoTime;
-        turnaroundTime = totalCpuTime - arrivalTime;
         ioQueueWaitTime = 0;
         readyQueueWaitTime = 0;
         state = State.NEW;
@@ -96,8 +94,16 @@ public class SystemProcess {
         return turnaroundTime;
     }
 
+    public void setTurnaroundTime(int turnaroundTime) {
+        this.turnaroundTime = turnaroundTime;
+    }
+
     public int getCompletionTime() {
         return completionTime;
+    }
+
+    public void setCompletionTime(int completionTime) {
+        this.completionTime = completionTime;
     }
 
     public int getCpuBurstRemaining() {
@@ -122,10 +128,6 @@ public class SystemProcess {
 
     public State getState() {
         return state;
-    }
-
-    public void setTurnaroundTime(int turnaroundTime){
-        this.turnaroundTime = turnaroundTime;
     }
 
     public void setState(State state) {

@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Main {
 
-
+    //create rate of sleep in arguement of main
     public static void main(String[] args) throws InterruptedException {
         printSchedulerMenu();
     }
@@ -32,7 +32,7 @@ public class Main {
                 System.out.println("Please Select a Scheduling Algorithm: ");
                 System.out.println();
                 int userChoice = printMenuTextVariableOptions("1 -- First Come First Served. " + "\n" + "2 -- Priority."
-                        + "\n" + "3 -- Round Robin.\n" + "4 -- Shortest Job First\n" + "5 -- Simulation Mode\n" +"6 -- Print To File\n"
+                        + "\n" + "3 -- Round Robin.\n" + "4 -- Shortest Job First\n" + "5 -- Simulation Mode\n" + "6 -- Print To File\n"
                         + "7 -- Exit", 1, 7);
                 if (userChoice == 1) {
                     readJobsFromFile("scenario.txt", firstComeFirstServedScheduler);
@@ -50,10 +50,9 @@ public class Main {
                     startSchedulerThread(shortJobFirstScheduler);
                 } else if (userChoice == 5) {
                     //Simulation Mode
-                } else if(userChoice == 6){
+                } else if (userChoice == 6) {
                     //Print to File
-                }
-                else if (userChoice == 7) {
+                } else if (userChoice == 7) {
                     System.out.println("Thanks for using this program!");
                     System.exit(0);
                     break;
@@ -64,12 +63,12 @@ public class Main {
         }
     }
 
-    public static void printToFile(){
-            //call terminated list to print to file
+    public static void printToFile() {
+        //call terminated list to print to file
 
     }
 
-    public static void setQuantum(){
+    public static void setQuantum() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter Quantum to be set: ");
         int quantumValue = scanner.nextInt();
@@ -137,7 +136,7 @@ public class Main {
                 }
 
                 SystemProcess newProcess = new SystemProcess(name, arrivalTime, priorityLevel, cpuBurstList, ioBurstList);
-                scheduler.addProcess(newProcess);
+                scheduler.processList.add(newProcess);
                 cpuBurstList.removeAll(cpuBurstList);
                 ioBurstList.removeAll(ioBurstList);
                 if (bufferedReader == null) {
@@ -155,7 +154,7 @@ public class Main {
             PrintWriter printer = new PrintWriter(writer);
 
             printer.println("Process: " + scheduler.getNextProcess());
-            printer.println("CPU Utilization: " );
+            printer.println("CPU Utilization: ");
             printer.println("Throughput: ");
             printer.println("Turn Around Time: " + scheduler);
             printer.println("Waiting Time: ");

@@ -7,46 +7,75 @@ import com.os.models.SystemProcess;
 public class ShortJobFirstScheduler extends Scheduler {
 
     public void run() {
+
         IS_RUNNING = true;
         while (IS_RUNNING) {
-
+            int threadSleep = 0;
             try {
-                if (cpuCurrentProcess == null) {
-                    cpuCurrentProcess = getNextProcess();
-
-                }
-                if (ioCurrentProcess == null) {
-                    ioCurrentProcess = getNextIoProcess();
-                }
+                Thread.sleep(threadSleep);
+                runningTime++;
+                queueProcessesFromListOfProcesses();
+                getNextProcesses();
+                incrementIoQueueWaitTime();
+                incrementReadyQueueWaitTime();
                 if (cpuCurrentProcess == null && ioCurrentProcess == null) {
                     continue;
                 }
-                if (cpuCurrentProcess != null && cpuCurrentProcess.cpuHasBurstRemaining()) {
+
+                if (cpuCurrentProcess != null && cpuCurrentProcess.cpuHasBurstRemaining() && cpuCurrentProcess.getState() == State.RUNNING) {
                     cpuCurrentProcess.decrementCpuBurstTime();
                 }
-                if (ioCurrentProcess != null && ioCurrentProcess.ioHasBurstRemaining()) {
+                if (ioCurrentProcess != null && ioCurrentProcess.ioHasBurstRemaining() && ioCurrentProcess.getState() == State.RUNNING) {
                     ioCurrentProcess.decrementIoBurst();
                 }
-                if (cpuCurrentProcess != null && !cpuCurrentProcess.cpuHasBurstRemaining() && cpuCurrentProcess.ioHasBurstRemaining()) {
+                if (cpuCurrentProcess != null && cpuCurrentProcess.cpuHasBurstRemaining() == false && cpuCurrentProcess.ioHasBurstRemaining() == true) {
                     moveCurrentProcessToIoWaitQueue();
+                    if (cpuCurrentProcess == null) {
+                        cpuCurrentProcess = getNextProcess();
+
+                    }
 
                 }
-                if (ioCurrentProcess != null && ioCurrentProcess.cpuHasBurstRemaining() && !ioCurrentProcess.ioHasBurstRemaining()) {
+                if (ioCurrentProcess != null && ioCurrentProcess.cpuHasBurstRemaining() == true && ioCurrentProcess.ioHasBurstRemaining() == false) {
                     moveCurrentProcessToReadyQueue();
+                    if (ioCurrentProcess == null) {
+                        ioCurrentProcess = getNextIoProcess();
+                    }
 
                 }
+                getNextProcesses();
+
+
                 terminateIfCpuComplete();
                 terminateIfIoComplete();
-                printSchedulerOutput();
 
-            } finally {
-                runningTime++;
-                completionTime = runningTime;
+                getNextProcesses();
+
+                if (cpuCurrentProcess != null && cpuCurrentProcess.getState() == State.WAITING) {
+                    cpuCurrentProcess.setState(State.RUNNING);
+                }
+                if (ioCurrentProcess != null && ioCurrentProcess.getState() == State.WAITING) {
+                    ioCurrentProcess.setState(State.RUNNING);
+                }
+                printSchedulerOutput();
+                if (cpuCurrentProcess != null) {
+                    cpuUtilCounter++;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
-//add more processes
-    //confirm by hand
+
+    private void getNextProcesses() {
+        if (cpuCurrentProcess == null) {
+            cpuCurrentProcess = getNextProcess();
+
+        }
+        if (ioCurrentProcess == null) {
+            ioCurrentProcess = getNextIoProcess();
+        }
+    }
 
     private void moveCurrentProcessToIoWaitQueue() {
         //set first cpu burst to cpuburstremaining
