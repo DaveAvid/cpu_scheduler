@@ -2,10 +2,14 @@ package com.os;
 
 import com.os.algorithms.FirstComeFirstServedScheduler;
 import com.os.algorithms.PriorityScheduler;
+import com.os.algorithms.RoundRobinScheduler;
+import com.os.algorithms.ShortJobFirstScheduler;
 import com.os.controller.Scheduler;
 import com.os.models.SystemProcess;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,20 +20,21 @@ public class Main {
 
     //create rate of sleep in argument of main
     public static void main(String[] args) throws FileNotFoundException {
-        mainMenu();
+        printSchedulerMenu();
     }
 
-    private static void mainMenu() {
+    private static void mainMenu(Scheduler scheduler) {
 
         int menuSelection = 0;
         Scanner scanner = new Scanner(System.in);
         while (true) {
+            System.out.println("Select a mode for the chosen algorithm. ");
             System.out.println("1 -- Simulation Mode. " + "\n" + "2 -- Step Mode." + "\n" + "3 -- Exit." + "\n");
             System.out.print("Enter a value: ");
             menuSelection = scanner.nextInt();
             switch (menuSelection) {
                 case 1:
-                    Scheduler scheduler = new FirstComeFirstServedScheduler();
+
                     printSleepSpeedMenu(scheduler);
                     break;
                 case 2:
@@ -48,7 +53,7 @@ public class Main {
     }
 
 
-    public static void printSchedulerMenu(Scheduler scheduler) {
+    public static void printSchedulerMenu() {
         while (true) {
             try {
                 System.out.println("____________Cpu Scheduling Simulation____________");
@@ -58,19 +63,20 @@ public class Main {
                         + "\n" + "3 -- Round Robin.\n" + "4 -- Shortest Job First\n" + "5 -- Simulation Mode\n" + "6 -- Print To File\n"
                         + "7 -- Exit", 1, 7);
                 if (userChoice == 1) {
-                    readJobsFromFile("scenario.txt", scheduler);
-                    startSchedulerThread(scheduler);
+                    Scheduler scheduler = new FirstComeFirstServedScheduler();
+                    mainMenu(scheduler);
+
 
                 } else if (userChoice == 2) {
-                    readJobsFromFile("scenario.txt", scheduler);
-                    startSchedulerThread(scheduler);
+                    Scheduler scheduler = new PriorityScheduler();
+                    mainMenu(scheduler);
                 } else if (userChoice == 3) {
+                    Scheduler scheduler = new RoundRobinScheduler();
                     setQuantum();
-                    readJobsFromFile("scenario.txt", scheduler);
-                    startSchedulerThread(scheduler);
+                    mainMenu(scheduler);
                 } else if (userChoice == 4) {
-                    readJobsFromFile("scenario.txt", scheduler);
-                    startSchedulerThread(scheduler);
+                    Scheduler scheduler = new ShortJobFirstScheduler();
+                    mainMenu(scheduler);
                 } else if (userChoice == 6) {
                     //Print to File
                 } else if (userChoice == 7) {
@@ -94,13 +100,16 @@ public class Main {
                         + "\n" + "3 -- 500ms \n" + "7 -- Exit", 1, 7);
                 if (userChoice == 1) {
                     scheduler.setSleepNumber(100);
-                    printSchedulerMenu(scheduler);
+                    readJobsFromFile("scenario.txt", scheduler);
+                    startSchedulerThread(scheduler);
                 } else if (userChoice == 2) {
                     scheduler.setSleepNumber(300);
-                    printSchedulerMenu(scheduler);
+                    readJobsFromFile("scenario.txt", scheduler);
+                    startSchedulerThread(scheduler);
                 } else if (userChoice == 3) {
                     scheduler.setSleepNumber(500);
-                    printSchedulerMenu(scheduler);
+                    readJobsFromFile("scenario.txt", scheduler);
+                    startSchedulerThread(scheduler);
                 } else if (userChoice == 7) {
                     System.out.println("Thanks for using this program!");
                     System.exit(0);

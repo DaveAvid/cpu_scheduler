@@ -18,16 +18,19 @@ public abstract class Scheduler implements Runnable {
     public List<SystemProcess> processList = new ArrayList<>();
     public List<Integer> waitTimesList = new ArrayList<>();
     public List<Integer> turnaroundTimes = new ArrayList<>();
+    public List<Double> cpuUtilizationTimes = new ArrayList<>();
+    public int runningTime = -1;
+    public double cpuUtilCounter = 0.0;
     protected int sleepNumber;
     protected Queue<SystemProcess> readyQueue = new LinkedList<>();
     protected Queue<SystemProcess> ioWaitQueue = new LinkedList<>();
     protected boolean IS_RUNNING = false;
-    public int runningTime = -1;
     protected int completionTime = 0;
+    protected double cpuUtilization = 0.0;
     protected int totalTimeInWaitQueues = 0;
     protected double averageTurnaroundTime = 0;
+    protected double averageCpuUtilizationTime = 0.0;
     protected int averageWaitTime = 0;
-    public double cpuUtilCounter = 0.0;
     protected SystemProcess cpuCurrentProcess;
     protected SystemProcess ioCurrentProcess;
     protected List<SystemProcess> terminatedProcessList = new ArrayList<>();
@@ -40,6 +43,7 @@ public abstract class Scheduler implements Runnable {
         this.sleepNumber = sleepNumber;
     }
 
+
     private void terminationPrint(SystemProcess systemProcess) {
         System.out.println();
         System.out.println("| Process Termination Detected |");
@@ -47,17 +51,36 @@ public abstract class Scheduler implements Runnable {
         System.out.println("Total Turnaround Time " + systemProcess.getTurnaroundTime());
         System.out.println("Total Cpu Wait Time " + systemProcess.getReadyQueueWaitTime());
         System.out.println("Total Io Wait Time " + systemProcess.getIoQueueWaitTime());
-        System.out.println("Cpu Utilization " + ((cpuUtilCounter / runningTime) * 100) + "% ");
+        System.out.println("Cpu Utilization " + (calculateCpuUtilization() + "% "));
         System.out.println("Average Turnaround Time: " + calculateAverageTurnaroundTime());
         System.out.println("Average Wait Time: " + calculateAverageWaitTime());
 
+    }
+
+    public double calculateCpuUtilization() {
+        return cpuUtilization = (cpuUtilCounter / runningTime) * 100;
     }
 
     public void addTurnaroundTimesToList(SystemProcess systemProcess) {
         turnaroundTimes.add(systemProcess.getTurnaroundTime());
     }
 
-    public void averageResponseTime(SystemProcess systemProcess){
+    public void addCpuUtilizationTimesToList() {
+        cpuUtilizationTimes.add(cpuUtilization);
+    }
+
+    public double calculateAverageCpuUtilization() {
+        double totalCpuUtilizationTimes = 0.0;
+        int numberOfCpuUtilizationTimes = cpuUtilizationTimes.size();
+        for (double cpuUtilization : cpuUtilizationTimes) {
+            totalCpuUtilizationTimes += cpuUtilization;
+        }
+        averageCpuUtilizationTime = (totalCpuUtilizationTimes / numberOfCpuUtilizationTimes);
+
+        return averageCpuUtilizationTime;
+    }
+
+    public void averageResponseTime(SystemProcess systemProcess) {
 
     }
 
@@ -97,6 +120,7 @@ public abstract class Scheduler implements Runnable {
             cpuCurrentProcess.setTurnaroundTime(cpuCurrentProcess.getCompletionTime() - cpuCurrentProcess.getArrivalTime());
             addWaitTimesToList(cpuCurrentProcess);
             addTurnaroundTimesToList(cpuCurrentProcess);
+            addCpuUtilizationTimesToList();
             terminationPrint(cpuCurrentProcess);
             terminatedProcessList.add(cpuCurrentProcess);
             cpuCurrentProcess = null;
@@ -161,18 +185,19 @@ public abstract class Scheduler implements Runnable {
 
         System.out.println("I/O: [" + (ioCurrentProcess != null ? ioCurrentProcess.getName() : "") + "] " + "State: " + "[" + (ioCurrentProcess != null ? ioCurrentProcess.getState() : "") + "]");
 
-        if(readyQueue.isEmpty() && ioWaitQueue.isEmpty() && cpuCurrentProcess == null && ioCurrentProcess == null){
+        if (readyQueue.isEmpty() && ioWaitQueue.isEmpty() && cpuCurrentProcess == null && ioCurrentProcess == null) {
             System.out.println("Done!");
-            writeResultsToFile("AverageResults");
+            writeResultsToFile("average_results_from_run.txt");
         }
 
     }
-    public  void writeResultsToFile(String fileName) throws FileNotFoundException {
+
+    public void writeResultsToFile(String fileName) throws FileNotFoundException {
         try {
             FileWriter writer = new FileWriter(fileName);
             PrintWriter printer = new PrintWriter(writer);
-            printer.println("CPU Utilization: " + ((cpuUtilCounter / runningTime) * 100) + "% ");
-            printer.println("Throughput: " + processList.size()/runningTime);
+            printer.println("CPU Utilization: " + (calculateAverageCpuUtilization() + "% "));
+            printer.println("Throughput: " + processList.size() / runningTime);
             printer.println("Turn Around Time: " + calculateAverageTurnaroundTime());
             printer.println("Waiting Time: " + calculateAverageWaitTime());
             printer.println("Response Time: " + runningTime);

@@ -11,9 +11,8 @@ public class PriorityScheduler extends Scheduler {
 
         IS_RUNNING = true;
         while (IS_RUNNING) {
-            int threadSleep = 0;
             try {
-                Thread.sleep(threadSleep);
+                Thread.sleep(getSleepNumber());
                 runningTime++;
                 queueProcessesFromListOfProcesses();
                 getNextProcesses();
