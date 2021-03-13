@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2d8f6b2b-01ea-46f1-81cd-56f0ac3ab13b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/os/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/FirstComeFirstServedScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/PriorityScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/PriorityScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/RoundRobinScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/RoundRobinScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/os/algorithms/ShortJobFirstScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/algorithms/ShortJobFirstScheduler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,6 +67,17 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.os.Main" />
       <module name="cpu_scheduler" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -315,7 +331,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615606779258</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="METRICS">
+      <created>1615663579194</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1615663579194</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -335,32 +358,5 @@
     <MESSAGE value="3 algos working now." />
     <MESSAGE value="METRICS" />
     <option name="LAST_COMMIT_MESSAGE" value="METRICS" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/os/Main.java</url>
-          <line>105</line>
-          <option name="timeStamp" value="126" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java</url>
-          <line>34</line>
-          <properties class="com.os.controller.Scheduler" method="setSleepNumber">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="129" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/os/controller/Scheduler.java</url>
-          <line>30</line>
-          <properties class="com.os.controller.Scheduler" method="getSleepNumber">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="130" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

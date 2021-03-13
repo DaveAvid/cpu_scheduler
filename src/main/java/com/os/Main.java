@@ -2,8 +2,6 @@ package com.os;
 
 import com.os.algorithms.FirstComeFirstServedScheduler;
 import com.os.algorithms.PriorityScheduler;
-import com.os.algorithms.RoundRobinScheduler;
-import com.os.algorithms.ShortJobFirstScheduler;
 import com.os.controller.Scheduler;
 import com.os.models.SystemProcess;
 
@@ -16,13 +14,9 @@ public class Main {
     boolean flag = false;
 
 
-    //create rate of sleep in arguement of main
-    public static void main(String[] args) throws InterruptedException {
-
-//        printSchedulerMenu();
+    //create rate of sleep in argument of main
+    public static void main(String[] args) throws FileNotFoundException {
         mainMenu();
-
-
     }
 
     private static void mainMenu() {
@@ -43,6 +37,8 @@ public class Main {
                     printSleepSpeedMenu(scheduler1);
                     break;
                 case 3:
+                    System.out.println("Thanks for using this program!");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Enter valid input");
@@ -52,7 +48,7 @@ public class Main {
     }
 
 
-    public static void printSchedulerMenu() {
+    public static void printSchedulerMenu(Scheduler scheduler) {
         while (true) {
             try {
                 System.out.println("____________Cpu Scheduling Simulation____________");
@@ -62,21 +58,17 @@ public class Main {
                         + "\n" + "3 -- Round Robin.\n" + "4 -- Shortest Job First\n" + "5 -- Simulation Mode\n" + "6 -- Print To File\n"
                         + "7 -- Exit", 1, 7);
                 if (userChoice == 1) {
-                    Scheduler scheduler = new FirstComeFirstServedScheduler();
                     readJobsFromFile("scenario.txt", scheduler);
                     startSchedulerThread(scheduler);
 
                 } else if (userChoice == 2) {
-                    Scheduler scheduler = new PriorityScheduler();
                     readJobsFromFile("scenario.txt", scheduler);
                     startSchedulerThread(scheduler);
                 } else if (userChoice == 3) {
-                    Scheduler scheduler = new RoundRobinScheduler();
                     setQuantum();
                     readJobsFromFile("scenario.txt", scheduler);
                     startSchedulerThread(scheduler);
                 } else if (userChoice == 4) {
-                    Scheduler scheduler = new ShortJobFirstScheduler();
                     readJobsFromFile("scenario.txt", scheduler);
                     startSchedulerThread(scheduler);
                 } else if (userChoice == 6) {
@@ -93,7 +85,6 @@ public class Main {
     }
 
     public static void printSleepSpeedMenu(Scheduler scheduler) {
-
         while (true) {
             try {
                 System.out.println("____________Cpu Scheduling Simulation____________");
@@ -103,13 +94,13 @@ public class Main {
                         + "\n" + "3 -- 500ms \n" + "7 -- Exit", 1, 7);
                 if (userChoice == 1) {
                     scheduler.setSleepNumber(100);
-                    printSchedulerMenu();
+                    printSchedulerMenu(scheduler);
                 } else if (userChoice == 2) {
                     scheduler.setSleepNumber(300);
-                    printSchedulerMenu();
+                    printSchedulerMenu(scheduler);
                 } else if (userChoice == 3) {
                     scheduler.setSleepNumber(500);
-                    printSchedulerMenu();
+                    printSchedulerMenu(scheduler);
                 } else if (userChoice == 7) {
                     System.out.println("Thanks for using this program!");
                     System.exit(0);
@@ -206,23 +197,6 @@ public class Main {
         }
     }
 
-    public void writeResultsToFile(String fileName, Scheduler scheduler) {
-        try {
-            FileWriter writer = new FileWriter(fileName);
-            PrintWriter printer = new PrintWriter(writer);
-
-            printer.println("Process: " + scheduler);
-            printer.println("CPU Utilization: ");
-            printer.println("Throughput: "  );
-            printer.println("Turn Around Time: " + scheduler);
-            printer.println("Waiting Time: ");
-            printer.println("Response Time: ");
-            printer.close();
-            writer.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }
 
 

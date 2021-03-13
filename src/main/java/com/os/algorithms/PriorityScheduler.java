@@ -4,6 +4,8 @@ import com.os.controller.Scheduler;
 import com.os.models.State;
 import com.os.models.SystemProcess;
 
+import java.io.FileNotFoundException;
+
 public class PriorityScheduler extends Scheduler {
     public void run() {
 
@@ -60,7 +62,7 @@ public class PriorityScheduler extends Scheduler {
                 if (cpuCurrentProcess != null) {
                     cpuUtilCounter++;
                 }
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | FileNotFoundException e) {
                 e.printStackTrace();
             }
         }

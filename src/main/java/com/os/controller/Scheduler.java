@@ -3,6 +3,10 @@ package com.os.controller;
 import com.os.models.State;
 import com.os.models.SystemProcess;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,12 +22,12 @@ public abstract class Scheduler implements Runnable {
     protected Queue<SystemProcess> readyQueue = new LinkedList<>();
     protected Queue<SystemProcess> ioWaitQueue = new LinkedList<>();
     protected boolean IS_RUNNING = false;
-    protected int runningTime = -1;
+    public int runningTime = -1;
     protected int completionTime = 0;
     protected int totalTimeInWaitQueues = 0;
     protected double averageTurnaroundTime = 0;
     protected int averageWaitTime = 0;
-    protected double cpuUtilCounter = 0.0;
+    public double cpuUtilCounter = 0.0;
     protected SystemProcess cpuCurrentProcess;
     protected SystemProcess ioCurrentProcess;
     protected List<SystemProcess> terminatedProcessList = new ArrayList<>();
@@ -51,6 +55,10 @@ public abstract class Scheduler implements Runnable {
 
     public void addTurnaroundTimesToList(SystemProcess systemProcess) {
         turnaroundTimes.add(systemProcess.getTurnaroundTime());
+    }
+
+    public void averageResponseTime(SystemProcess systemProcess){
+
     }
 
     public double calculateAverageTurnaroundTime() {
@@ -123,7 +131,7 @@ public abstract class Scheduler implements Runnable {
         }
     }
 
-    public void printSchedulerOutput() throws NullPointerException {
+    public void printSchedulerOutput() throws NullPointerException, FileNotFoundException {
         System.out.println();
         System.out.println("System Time: " + runningTime);
 
@@ -153,7 +161,27 @@ public abstract class Scheduler implements Runnable {
 
         System.out.println("I/O: [" + (ioCurrentProcess != null ? ioCurrentProcess.getName() : "") + "] " + "State: " + "[" + (ioCurrentProcess != null ? ioCurrentProcess.getState() : "") + "]");
 
+        if(readyQueue.isEmpty() && ioWaitQueue.isEmpty() && cpuCurrentProcess == null && ioCurrentProcess == null){
+            System.out.println("Done!");
+            writeResultsToFile("AverageResults");
+        }
 
+    }
+    public  void writeResultsToFile(String fileName) throws FileNotFoundException {
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            PrintWriter printer = new PrintWriter(writer);
+            printer.println("CPU Utilization: " + ((cpuUtilCounter / runningTime) * 100) + "% ");
+            printer.println("Throughput: " + processList.size()/runningTime);
+            printer.println("Turn Around Time: " + calculateAverageTurnaroundTime());
+            printer.println("Waiting Time: " + calculateAverageWaitTime());
+            printer.println("Response Time: " + runningTime);
+            printer.close();
+            writer.close();
+            System.out.println("Text File Printed");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Queue<SystemProcess> getReadyQueue() {
