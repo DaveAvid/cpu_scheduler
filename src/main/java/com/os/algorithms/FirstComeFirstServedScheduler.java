@@ -10,9 +10,8 @@ public class FirstComeFirstServedScheduler extends Scheduler {
 
         IS_RUNNING = true;
         while (IS_RUNNING) {
-            int threadSleep = 100;
             try {
-                Thread.sleep(threadSleep);
+                Thread.sleep(getSleepNumber());
                 runningTime++;
                 queueProcessesFromListOfProcesses();
                 getNextProcesses();

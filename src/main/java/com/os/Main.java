@@ -13,19 +13,45 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    boolean flag = false;
+
 
     //create rate of sleep in arguement of main
     public static void main(String[] args) throws InterruptedException {
-        printSchedulerMenu();
+
+//        printSchedulerMenu();
+        mainMenu();
+
+
+    }
+
+    private static void mainMenu() {
+
+        int menuSelection = 0;
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("1 -- Simulation Mode. " + "\n" + "2 -- Step Mode." + "\n" + "3 -- Exit." + "\n");
+            menuSelection = scanner.nextInt();
+            switch (menuSelection) {
+                case 1:
+                    Scheduler scheduler = new FirstComeFirstServedScheduler();
+                    printSleepSpeedMenu(scheduler);
+                    break;
+                case 2:
+                    Scheduler scheduler1 = new PriorityScheduler();
+                    printSleepSpeedMenu(scheduler1);
+                    break;
+                case 3:
+                    break;
+                default:
+                    System.out.println("Enter valid input");
+                    break;
+            }
+        }
     }
 
 
     public static void printSchedulerMenu() {
-        //create one instance of scheduler
-        Scheduler firstComeFirstServedScheduler = new FirstComeFirstServedScheduler();
-        Scheduler shortJobFirstScheduler = new ShortJobFirstScheduler();
-        Scheduler priorityScheduler = new PriorityScheduler();
-        Scheduler roundRobinScheduler = new RoundRobinScheduler();
         while (true) {
             try {
                 System.out.println("____________Cpu Scheduling Simulation____________");
@@ -35,22 +61,54 @@ public class Main {
                         + "\n" + "3 -- Round Robin.\n" + "4 -- Shortest Job First\n" + "5 -- Simulation Mode\n" + "6 -- Print To File\n"
                         + "7 -- Exit", 1, 7);
                 if (userChoice == 1) {
-                    readJobsFromFile("scenario.txt", firstComeFirstServedScheduler);
-                    startSchedulerThread(firstComeFirstServedScheduler);
+                    Scheduler scheduler = new FirstComeFirstServedScheduler();
+                    readJobsFromFile("scenario.txt", scheduler);
+                    startSchedulerThread(scheduler);
+
                 } else if (userChoice == 2) {
-                    readJobsFromFile("scenario.txt", priorityScheduler);
-                    startSchedulerThread(priorityScheduler);
+                    Scheduler scheduler = new PriorityScheduler();
+                    readJobsFromFile("scenario.txt", scheduler);
+                    startSchedulerThread(scheduler);
                 } else if (userChoice == 3) {
+                    Scheduler scheduler = new RoundRobinScheduler();
                     setQuantum();
-                    readJobsFromFile("scenario.txt", roundRobinScheduler);
-                    startSchedulerThread(roundRobinScheduler);
+                    readJobsFromFile("scenario.txt", scheduler);
+                    startSchedulerThread(scheduler);
                 } else if (userChoice == 4) {
-                    readJobsFromFile("scenario.txt", shortJobFirstScheduler);
-                    startSchedulerThread(shortJobFirstScheduler);
-                } else if (userChoice == 5) {
-                    //Simulation Mode
+                    Scheduler scheduler = new ShortJobFirstScheduler();
+                    readJobsFromFile("scenario.txt", scheduler);
+                    startSchedulerThread(scheduler);
                 } else if (userChoice == 6) {
                     //Print to File
+                } else if (userChoice == 7) {
+                    System.out.println("Thanks for using this program!");
+                    System.exit(0);
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Error has occurred.");
+            }
+        }
+    }
+
+    public static void printSleepSpeedMenu(Scheduler scheduler) {
+
+        while (true) {
+            try {
+                System.out.println("____________Cpu Scheduling Simulation____________");
+                System.out.println("Please Select a Scheduling Algorithm: ");
+                System.out.println();
+                int userChoice = printMenuTextVariableOptions("1 -- 100ms " + "\n" + "2 -- 300ms "
+                        + "\n" + "3 -- 500ms \n" + "7 -- Exit", 1, 7);
+                if (userChoice == 1) {
+                    scheduler.setSleepNumber(100);
+                    printSchedulerMenu();
+                } else if (userChoice == 2) {
+                    scheduler.setSleepNumber(300);
+                    printSchedulerMenu();
+                } else if (userChoice == 3) {
+                    scheduler.setSleepNumber(500);
+                    printSchedulerMenu();
                 } else if (userChoice == 7) {
                     System.out.println("Thanks for using this program!");
                     System.exit(0);

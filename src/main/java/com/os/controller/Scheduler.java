@@ -14,6 +14,7 @@ public abstract class Scheduler implements Runnable {
     public List<SystemProcess> processList = new ArrayList<>();
     public List<Integer> waitTimesList = new ArrayList<>();
     public List<Integer> turnaroundTimes = new ArrayList<>();
+    protected int sleepNumber;
     protected Queue<SystemProcess> readyQueue = new LinkedList<>();
     protected Queue<SystemProcess> ioWaitQueue = new LinkedList<>();
     protected boolean IS_RUNNING = false;
@@ -26,6 +27,14 @@ public abstract class Scheduler implements Runnable {
     protected SystemProcess cpuCurrentProcess;
     protected SystemProcess ioCurrentProcess;
     protected List<SystemProcess> terminatedProcessList = new ArrayList<>();
+
+    public int getSleepNumber() {
+        return sleepNumber;
+    }
+
+    public void setSleepNumber(int sleepNumber) {
+        this.sleepNumber = sleepNumber;
+    }
 
     private void terminationPrint(SystemProcess systemProcess) {
         System.out.println();
