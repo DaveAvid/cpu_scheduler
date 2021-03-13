@@ -10,7 +10,7 @@ public class FirstComeFirstServedScheduler extends Scheduler {
 
         IS_RUNNING = true;
         while (IS_RUNNING) {
-            int threadSleep = 0;
+            int threadSleep = 100;
             try {
                 Thread.sleep(threadSleep);
                 runningTime++;
@@ -48,6 +48,7 @@ public class FirstComeFirstServedScheduler extends Scheduler {
 
                 terminateIfCpuComplete();
                 terminateIfIoComplete();
+
 
                 getNextProcesses();
 

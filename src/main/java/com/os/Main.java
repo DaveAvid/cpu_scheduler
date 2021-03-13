@@ -44,7 +44,6 @@ public class Main {
                     setQuantum();
                     readJobsFromFile("scenario.txt", roundRobinScheduler);
                     startSchedulerThread(roundRobinScheduler);
-                    //
                 } else if (userChoice == 4) {
                     readJobsFromFile("scenario.txt", shortJobFirstScheduler);
                     startSchedulerThread(shortJobFirstScheduler);

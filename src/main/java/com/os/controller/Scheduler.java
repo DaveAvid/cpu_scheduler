@@ -12,17 +12,64 @@ import java.util.Queue;
 public abstract class Scheduler implements Runnable {
 
     public List<SystemProcess> processList = new ArrayList<>();
-    protected Queue<SystemProcess> readyQueue = new LinkedList<SystemProcess>();
-    protected Queue<SystemProcess> ioWaitQueue = new LinkedList<SystemProcess>();
+    public List<Integer> waitTimesList = new ArrayList<>();
+    public List<Integer> turnaroundTimes = new ArrayList<>();
+    protected Queue<SystemProcess> readyQueue = new LinkedList<>();
+    protected Queue<SystemProcess> ioWaitQueue = new LinkedList<>();
     protected boolean IS_RUNNING = false;
     protected int runningTime = -1;
     protected int completionTime = 0;
-    protected int totalIoQueueWaitTime = 0;
-    protected int totalReadyQueueWaitTime = 0;
+    protected int totalTimeInWaitQueues = 0;
+    protected double averageTurnaroundTime = 0;
+    protected int averageWaitTime = 0;
     protected double cpuUtilCounter = 0.0;
     protected SystemProcess cpuCurrentProcess;
     protected SystemProcess ioCurrentProcess;
     protected List<SystemProcess> terminatedProcessList = new ArrayList<>();
+
+    private void terminationPrint(SystemProcess systemProcess) {
+        System.out.println();
+        System.out.println("| Process Termination Detected |");
+        System.out.println("Terminated Process " + systemProcess.getName() + " at " + systemProcess.getCompletionTime() + " " + " [" + systemProcess.getState() + "]");
+        System.out.println("Total Turnaround Time " + systemProcess.getTurnaroundTime());
+        System.out.println("Total Cpu Wait Time " + systemProcess.getReadyQueueWaitTime());
+        System.out.println("Total Io Wait Time " + systemProcess.getIoQueueWaitTime());
+        System.out.println("Cpu Utilization " + ((cpuUtilCounter / runningTime) * 100) + "% ");
+        System.out.println("Average Turnaround Time: " + calculateAverageTurnaroundTime());
+        System.out.println("Average Wait Time: " + calculateAverageWaitTime());
+
+    }
+
+    public void addTurnaroundTimesToList(SystemProcess systemProcess) {
+        turnaroundTimes.add(systemProcess.getTurnaroundTime());
+    }
+
+    public double calculateAverageTurnaroundTime() {
+        int totalTurnaroundTimes = 0;
+        int numberOfTurnaroundTimes = turnaroundTimes.size();
+        for (Integer turnAroundTime : turnaroundTimes) {
+            totalTurnaroundTimes += turnAroundTime;
+        }
+        averageTurnaroundTime = (totalTurnaroundTimes / numberOfTurnaroundTimes);
+
+        return averageTurnaroundTime;
+    }
+
+    public double calculateAverageWaitTime() {
+        int totalWaitTimes = 0;
+        int numberOfWaitTimes = waitTimesList.size();
+        for (Integer waitTime : waitTimesList) {
+            totalWaitTimes += waitTime;
+        }
+        averageWaitTime = (totalWaitTimes / numberOfWaitTimes);
+        return averageWaitTime;
+    }
+
+    public void addWaitTimesToList(SystemProcess systemProcess) {
+        totalTimeInWaitQueues += systemProcess.getReadyQueueWaitTime() + systemProcess.getIoQueueWaitTime();
+        waitTimesList.add(totalTimeInWaitQueues);
+        totalTimeInWaitQueues = 0;
+    }
 
     public void terminateIfCpuComplete() {
         if (cpuCurrentProcess != null && !cpuCurrentProcess.cpuHasBurstRemaining() &&
@@ -31,20 +78,12 @@ public abstract class Scheduler implements Runnable {
             cpuCurrentProcess.setState(State.TERMINATED);
             cpuCurrentProcess.setCompletionTime(runningTime);
             cpuCurrentProcess.setTurnaroundTime(cpuCurrentProcess.getCompletionTime() - cpuCurrentProcess.getArrivalTime());
+            addWaitTimesToList(cpuCurrentProcess);
+            addTurnaroundTimesToList(cpuCurrentProcess);
             terminationPrint(cpuCurrentProcess);
             terminatedProcessList.add(cpuCurrentProcess);
             cpuCurrentProcess = null;
         }
-    }
-
-    private void terminationPrint(SystemProcess systemProcess) {
-        System.out.println();
-        System.out.println("Terminated Process " + systemProcess.getName() + " " + systemProcess.getCompletionTime());
-        System.out.println("Total Turnaround Time " + systemProcess.getTurnaroundTime());
-        System.out.println("Total Cpu Wait Time " + systemProcess.getReadyQueueWaitTime());
-        System.out.println("Total Io Wait Time " + systemProcess.getIoQueueWaitTime());
-        System.out.println("Cpu Utilization " + ((cpuUtilCounter / runningTime) * 100) + "% ");
-
     }
 
     public void terminateIfIoComplete() {
