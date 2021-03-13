@@ -29,7 +29,7 @@ public abstract class Scheduler implements Runnable {
     protected List<SystemProcess> terminatedProcessList = new ArrayList<>();
 
     public int getSleepNumber() {
-        return sleepNumber;
+        return this.sleepNumber;
     }
 
     public void setSleepNumber(int sleepNumber) {

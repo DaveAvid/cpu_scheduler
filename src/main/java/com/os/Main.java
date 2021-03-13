@@ -31,6 +31,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("1 -- Simulation Mode. " + "\n" + "2 -- Step Mode." + "\n" + "3 -- Exit." + "\n");
+            System.out.print("Enter a value: ");
             menuSelection = scanner.nextInt();
             switch (menuSelection) {
                 case 1:
@@ -210,9 +211,9 @@ public class Main {
             FileWriter writer = new FileWriter(fileName);
             PrintWriter printer = new PrintWriter(writer);
 
-            printer.println("Process: " + scheduler.getNextProcess());
+            printer.println("Process: " + scheduler);
             printer.println("CPU Utilization: ");
-            printer.println("Throughput: ");
+            printer.println("Throughput: "  );
             printer.println("Turn Around Time: " + scheduler);
             printer.println("Waiting Time: ");
             printer.println("Response Time: ");
